@@ -17,6 +17,12 @@ public class TireScript : MonoBehaviour
     [SerializeField]
     float springRestDistance = 1.0f;
 
+    [SerializeField]
+    float tireGripFactor = 1.0f; /* From 0 to 1 */
+
+    [SerializeField]
+    float tireMass = 10.0f;
+
     // Car rigidbody
     private Rigidbody carRigidbody = null;
 
@@ -24,13 +30,18 @@ public class TireScript : MonoBehaviour
     {
         carRigidbody = this.GetComponentInParent<Rigidbody>();
 
+        /* Test values */
+
         springStrength = 6000.0f;
         springDamper = 100.0f;
         wheelRadius = 0.8f;
         springRestDistance = wheelRadius;
+
+        tireGripFactor = 0.3f;
+        tireMass = 10f;
     }
 
-    // Update is called once per frame
+
     void FixedUpdate()
     {
 
@@ -38,6 +49,7 @@ public class TireScript : MonoBehaviour
 
         Debug.DrawRay(transform.position, -transform.up * wheelRadius, Color.green);
 
+        // Suspension Force
         if (Physics.Raycast(transform.position, -transform.up, out hit, wheelRadius))
         {
 
@@ -52,6 +64,24 @@ public class TireScript : MonoBehaviour
             float force = (offset * springStrength) - (velocity * springDamper);
 
             carRigidbody.AddForceAtPosition(springDirection * force, transform.position);
+
+        }
+
+        // Steering Force
+        if (Physics.Raycast(transform.position, -transform.up, out hit, wheelRadius))
+        {
+
+            Vector3 steeringDirection = transform.right;
+
+            Vector3 tireVelocity = carRigidbody.GetPointVelocity(transform.position);
+
+            float steeringVelocity = Vector3.Dot(steeringDirection, tireVelocity);
+
+            float desiredVelocityChange = -steeringVelocity * tireGripFactor;
+
+            float desiredAcceleration = desiredVelocityChange / Time.fixedDeltaTime;
+
+            carRigidbody.AddForceAtPosition(steeringDirection * tireMass * desiredAcceleration, transform.position);
 
         }
 
