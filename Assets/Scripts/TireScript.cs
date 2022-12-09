@@ -23,6 +23,15 @@ public class TireScript : MonoBehaviour
     [SerializeField]
     float tireMass = 10.0f;
 
+    [SerializeField]
+    float accelInput = 0.0f;
+
+    [SerializeField]
+    AnimationCurve powerCurve;
+
+    [SerializeField]
+    float carTopSpeed = 100.0f; // This should go to a CAR script it is illogical to have car speed on tires
+
     // Car rigidbody
     private Rigidbody carRigidbody = null;
 
@@ -32,13 +41,16 @@ public class TireScript : MonoBehaviour
 
         /* Test values */
 
-        springStrength = 6000.0f;
-        springDamper = 100.0f;
-        wheelRadius = 0.8f;
+        springStrength = 2000.0f;
+        springDamper = 200.0f;
+        wheelRadius = 1f;
         springRestDistance = wheelRadius;
 
-        tireGripFactor = 0.3f;
-        tireMass = 10f;
+        tireGripFactor = 0.8f;
+        tireMass = 5f;
+
+        accelInput = 5000.0f;
+        carTopSpeed = 100000.0f;
     }
 
 
@@ -82,6 +94,29 @@ public class TireScript : MonoBehaviour
             float desiredAcceleration = desiredVelocityChange / Time.fixedDeltaTime;
 
             carRigidbody.AddForceAtPosition(steeringDirection * tireMass * desiredAcceleration, transform.position);
+
+        }
+
+        // Acceleration / Braking Force
+        if (Physics.Raycast(transform.position, -transform.up, out hit, wheelRadius))
+        {
+
+            Vector3 accelDirection = transform.right; /* Should be forward but my Car axis is messed up*/
+
+            // Acceleration torque
+            if (accelInput > 0.0f)
+            {
+
+                float carSpeed = Vector3.Dot(carRigidbody.transform.forward, carRigidbody.velocity);
+
+                float normalizedSpeed = Mathf.Clamp01(Mathf.Abs(carSpeed) / carTopSpeed);
+
+                float availableTorque = powerCurve.Evaluate(normalizedSpeed) * accelInput;
+
+                carRigidbody.AddForceAtPosition(accelDirection * availableTorque, transform.position);
+
+            }
+
 
         }
 
