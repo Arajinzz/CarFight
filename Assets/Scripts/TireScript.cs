@@ -49,8 +49,51 @@ public class TireScript : MonoBehaviour
         tireGripFactor = 0.8f;
         tireMass = 5f;
 
-        accelInput = 5000.0f;
+        accelInput = 0.0f;
         carTopSpeed = 100000.0f;
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+            accelInput = 5000.0f;
+        }
+
+        if (Input.GetKeyUp(KeyCode.W))
+        {
+            accelInput = 0;
+        }
+
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            accelInput = -5000.0f;
+        }
+
+        if (Input.GetKeyUp(KeyCode.S))
+        {
+            accelInput = 0;
+        }
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0, 30, 0));
+        }
+
+        if (Input.GetKeyUp(KeyCode.D))
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        }
+
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0, -30, 0));
+        }
+
+        if (Input.GetKeyUp(KeyCode.A))
+        {
+            transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+        }
     }
 
 
