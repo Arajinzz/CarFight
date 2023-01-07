@@ -57,7 +57,7 @@ public class TireScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
-            accelInput = 5000.0f;
+            accelInput = 2500.0f;
         }
 
         if (Input.GetKeyUp(KeyCode.W))
@@ -67,7 +67,7 @@ public class TireScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.S))
         {
-            accelInput = -5000.0f;
+            accelInput = -2500.0f;
         }
 
         if (Input.GetKeyUp(KeyCode.S))
@@ -77,7 +77,7 @@ public class TireScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.D))
         {
-            transform.rotation = Quaternion.Euler(new Vector3(0, 30, 0));
+            transform.rotation = Quaternion.Euler(new Vector3(0, 50, 0));
         }
 
         if (Input.GetKeyUp(KeyCode.D))
@@ -87,7 +87,7 @@ public class TireScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.A))
         {
-            transform.rotation = Quaternion.Euler(new Vector3(0, -30, 0));
+            transform.rotation = Quaternion.Euler(new Vector3(0, -50, 0));
         }
 
         if (Input.GetKeyUp(KeyCode.A))
