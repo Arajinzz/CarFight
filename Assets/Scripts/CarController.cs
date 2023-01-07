@@ -40,8 +40,8 @@ public class CarController : MonoBehaviour
         for( int i = 0; i < SuspensionPoints.Length; i++)
         {
             GameObject suspensionPt = SuspensionPoints[i];
-            Vector3 direction = - transform.TransformDirection(suspensionPt.transform.up);
-            Ray ray = new Ray(suspensionPt.transform.position, direction);
+            Vector3 direction = transform.TransformDirection(suspensionPt.transform.up);
+            Ray ray = new Ray(suspensionPt.transform.position, -direction);
             
             RaycastHit hit;
             bool didWeHit = Physics.Raycast(ray, out hit, SuspensionDistance);
@@ -56,8 +56,8 @@ public class CarController : MonoBehaviour
                 float compression = 1 - (hit.distance / SuspensionDistance);
                 // Calculate force to be applied
                 float force = (compression * SuspensionStrength) - (SuspensionDamping * carRb.GetPointVelocity(suspensionPt.transform.position).y);
-                // Calculate force
-                carRb.AddForceAtPosition(suspensionPt.transform.up * force, suspensionPt.transform.position);
+                // Calculate force, (Opposite of raycast)
+                carRb.AddForceAtPosition(direction * force, suspensionPt.transform.position);
             }
 
         }
