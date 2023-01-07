@@ -7,9 +7,13 @@ public class CarController : MonoBehaviour
 
     public GameObject[] SuspensionPoints;
     public float SuspensionDistance = 0.5f;
+    public float SuspensionStrength = 100000.0f;
+    public float SuspensionDamping = 100;
 
     private Ray[] SuspensionDebugRays;
     private RaycastHit[] SuspensionDebugHit;
+
+    private Rigidbody carRb;
 
 
     // Start is called before the first frame update
@@ -18,6 +22,8 @@ public class CarController : MonoBehaviour
 
         SuspensionDebugHit = new RaycastHit[SuspensionPoints.Length];
         SuspensionDebugRays = new Ray[SuspensionPoints.Length];
+
+        carRb = GetComponent<Rigidbody>();
 
     }
 
@@ -46,7 +52,12 @@ public class CarController : MonoBehaviour
      
             if (didWeHit)
             {
-                Debug.Log(hit.collider.name);
+                // Calculate compression ratio
+                float compression = 1 - (hit.distance / SuspensionDistance);
+                // Calculate force to be applied
+                float force = (compression * SuspensionStrength) - (SuspensionDamping * carRb.GetPointVelocity(suspensionPt.transform.position).y);
+                // Calculate force
+                carRb.AddForceAtPosition(suspensionPt.transform.up * force, suspensionPt.transform.position);
             }
 
         }
