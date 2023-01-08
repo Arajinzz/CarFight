@@ -87,20 +87,17 @@ public class CarController : MonoBehaviour
 
         }
 
-        // THERE IS A FLAW HERE
-        // THE CAR AXIS ARE MESSED UP IN WORLD SPACE
-        // IT NEEDS TO BE FIXED
         if (isAccel)
         {
             // Will just apply some force here
             // But i think it needs more work, because it takes time for a vehicle to reach max speed
             // So i think it needs a rework (a way to properly simulate acceleration)
-            carRb.AddForceAtPosition(transform.right * AccelPower, transform.position); // Center of mass is center of vehicle CURRENTLY
+            carRb.AddForceAtPosition(transform.forward * AccelPower, transform.position); // Center of mass is center of vehicle CURRENTLY
         }
 
         if (isBrake)
         {
-            carRb.AddForceAtPosition(-transform.right * AccelPower, transform.position); // Center of mass is center of vehicle CURRENTLY
+            carRb.AddForceAtPosition(-transform.forward * AccelPower, transform.position); // Center of mass is center of vehicle CURRENTLY
         }
 
         if (isTurningLeft)
@@ -112,6 +109,11 @@ public class CarController : MonoBehaviour
         {
             carRb.AddTorque(transform.up * TorquePower);
         }
+
+        // Adding Traction / Slip Reduction
+        // To prevent the car from sliding
+        Vector3 carVelocity = carRb.GetPointVelocity(transform.position);
+        Debug.DrawLine(transform.position, carVelocity, Color.red);
 
     }
 
