@@ -129,23 +129,6 @@ public class CarController : MonoBehaviour
             carRb.AddTorque(transform.up * TorquePower);
         }
 
-        // NOT FINISHED, MAYBE WILL BE REPLACED BY ANGULAR DRAG IN RIGIDBODY
-
-        // Adding Traction / Slip Reduction
-        // To prevent the car from sliding
-        Vector3 carVelocity = carRb.GetPointVelocity(transform.position);
-        // Positive means force to right
-        float sidewayVelocity = Vector3.Dot(transform.right, carVelocity);
-
-        float velocityChange = -sidewayVelocity * Traction;
-        float temp = velocityChange / Time.fixedDeltaTime;
-
-        Vector3 tempDir = (carVelocity - transform.position).normalized;
-
-        Debug.DrawRay(transform.position, transform.right * Traction * -sidewayVelocity, Color.red);
-        Debug.DrawRay(transform.position, transform.forward * Traction, Color.blue);
-        carRb.AddForceAtPosition(transform.right * Traction * sidewayVelocity, transform.position);
-
     }
 
     void OnDrawGizmos()
