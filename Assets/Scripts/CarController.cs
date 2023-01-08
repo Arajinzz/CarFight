@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class CarController : MonoBehaviour
 {
+
+    private struct SuspensionParams
+    {
+        public float compRatio;
+        public Vector3 impactPt;
+        public Vector3 impactNormal;
+    }
     
     private Rigidbody carRb;
 
@@ -11,6 +18,7 @@ public class CarController : MonoBehaviour
     public float SuspensionDistance = 0.5f;
     public float SuspensionStrength = 100.0f;
     public float SuspensionDamping = 2;
+    private SuspensionParams[] SuspensionCache;
 
     private Ray[] SuspensionDebugRays;
     private RaycastHit[] SuspensionDebugHit;
@@ -33,6 +41,8 @@ public class CarController : MonoBehaviour
 
         SuspensionDebugHit = new RaycastHit[SuspensionPoints.Length];
         SuspensionDebugRays = new Ray[SuspensionPoints.Length];
+
+        SuspensionCache = new SuspensionParams[SuspensionPoints.Length];
 
         carRb = GetComponent<Rigidbody>();
 
@@ -85,6 +95,11 @@ public class CarController : MonoBehaviour
                 float force = (compression * SuspensionStrength) - (SuspensionDamping * carRb.GetPointVelocity(suspensionPt.transform.position).y);
                 // Calculate force, (Opposite of raycast)
                 carRb.AddForceAtPosition(direction * force, suspensionPt.transform.position);
+
+                // Store in cache
+                SuspensionCache[i].compRatio = compression;
+                SuspensionCache[i].impactPt = hit.point;
+                SuspensionCache[i].impactNormal = hit.normal;
             }
 
         }
