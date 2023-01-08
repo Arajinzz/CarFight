@@ -19,6 +19,8 @@ public class CarController : MonoBehaviour
 
     public float TorquePower = 50.0f;
 
+    public float Traction = 10.0f; // Slip reduction
+
     // Input state
     bool isAccel = false;
     bool isBrake = false;
@@ -87,6 +89,8 @@ public class CarController : MonoBehaviour
 
         }
 
+        // TODO:
+        // ACCELERATION NEEDS TO BE PROJECTED TO GROUND TO PREVENT FLYING
         if (isAccel)
         {
             // Will just apply some force here
@@ -110,10 +114,23 @@ public class CarController : MonoBehaviour
             carRb.AddTorque(transform.up * TorquePower);
         }
 
+        // NOT FINISHED, MAYBE WILL BE REPLACED BY ANGULAR DRAG IN RIGIDBODY
+
         // Adding Traction / Slip Reduction
         // To prevent the car from sliding
         Vector3 carVelocity = carRb.GetPointVelocity(transform.position);
-        Debug.DrawLine(transform.position, carVelocity, Color.red);
+        // Positive means force to right
+        float sidewayVelocity = Vector3.Dot(carVelocity, transform.right);
+        
+        if (Mathf.Abs(sidewayVelocity) < 0.001)
+        {
+            sidewayVelocity = 0;
+        }
+
+        Vector3 sideVelocityVec = new Vector3(0, 0, sidewayVelocity);
+
+        Debug.DrawLine(transform.position, sideVelocityVec * Traction, Color.red);
+        //carRb.AddForceAtPosition( * Traction, transform.position);
 
     }
 
