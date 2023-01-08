@@ -104,14 +104,18 @@ public class CarController : MonoBehaviour
 
         }
 
-        // TODO:
-        // ACCELERATION NEEDS TO BE PROJECTED TO GROUND TO PREVENT FLYING
+
+        // Calculate projection of forward vector onto the ground
+        // or wherever the car is running on
+        Vector3 normal = SuspensionCache[0].impactNormal;
+        Vector3 projForward = Vector3.ProjectOnPlane(transform.forward, normal);
+
         if (isAccel)
         {
             // Will just apply some force here
             // But i think it needs more work, because it takes time for a vehicle to reach max speed
             // So i think it needs a rework (a way to properly simulate acceleration)
-            carRb.AddForceAtPosition(transform.forward * AccelPower, transform.position); // Center of mass is center of vehicle CURRENTLY
+            carRb.AddForceAtPosition(projForward * AccelPower, transform.position); // Center of mass is center of vehicle CURRENTLY
         }
 
         if (isBrake)
