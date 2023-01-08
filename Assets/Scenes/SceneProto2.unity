@@ -3062,9 +3062,9 @@ MonoBehaviour:
   SuspensionDistance: 0.5
   SuspensionStrength: 100
   SuspensionDamping: 2
-  AccelPower: 150
-  TorquePower: 50
-  Traction: 10
+  AccelPower: 120
+  TorquePower: 40
+  Traction: 1
 --- !u!1 &884371440
 GameObject:
   m_ObjectHideFlags: 0
