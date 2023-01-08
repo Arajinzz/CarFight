@@ -15,11 +15,15 @@ public class CarController : MonoBehaviour
     private Ray[] SuspensionDebugRays;
     private RaycastHit[] SuspensionDebugHit;
 
-    public float AccelPower = 200.0f; 
+    public float AccelPower = 100.0f;
+
+    public float TorquePower = 50.0f;
 
     // Input state
     bool isAccel = false;
     bool isBrake = false;
+    bool isTurningRight = false;
+    bool isTurningLeft = false;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +37,8 @@ public class CarController : MonoBehaviour
         // Extra protection
         isAccel = false;
         isBrake = false;
+        isTurningRight = false;
+        isTurningLeft = false;
 
     }
 
@@ -41,10 +47,15 @@ public class CarController : MonoBehaviour
     {
         isAccel = Input.GetKey(KeyCode.W);
         isBrake = Input.GetKey(KeyCode.S);
+        isTurningLeft = Input.GetKey(KeyCode.A);
+        isTurningRight = Input.GetKey(KeyCode.D);
 
         // If we're accelerating override Brake (don't brake)
         // This is just to test smoothly, it will be changed
         isBrake = isAccel ? false : isBrake;
+
+        // Override
+        isTurningLeft = isTurningRight ? false : isTurningLeft;
     }
 
     // We handle physics here
@@ -90,6 +101,16 @@ public class CarController : MonoBehaviour
         if (isBrake)
         {
             carRb.AddForceAtPosition(-transform.right * AccelPower, transform.position); // Center of mass is center of vehicle CURRENTLY
+        }
+
+        if (isTurningLeft)
+        {
+            carRb.AddTorque(-transform.up * TorquePower);
+        }
+
+        if (isTurningRight)
+        {
+            carRb.AddTorque(transform.up * TorquePower);
         }
 
     }
