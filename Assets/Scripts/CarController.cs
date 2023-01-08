@@ -120,17 +120,16 @@ public class CarController : MonoBehaviour
         // To prevent the car from sliding
         Vector3 carVelocity = carRb.GetPointVelocity(transform.position);
         // Positive means force to right
-        float sidewayVelocity = Vector3.Dot(carVelocity, transform.right);
-        
-        if (Mathf.Abs(sidewayVelocity) < 0.001)
-        {
-            sidewayVelocity = 0;
-        }
+        float sidewayVelocity = Vector3.Dot(transform.right, carVelocity);
 
-        Vector3 sideVelocityVec = new Vector3(0, 0, sidewayVelocity);
+        float velocityChange = -sidewayVelocity * Traction;
+        float temp = velocityChange / Time.fixedDeltaTime;
 
-        Debug.DrawLine(transform.position, sideVelocityVec * Traction, Color.red);
-        //carRb.AddForceAtPosition( * Traction, transform.position);
+        Vector3 tempDir = (carVelocity - transform.position).normalized;
+
+        Debug.DrawRay(transform.position, transform.right * Traction * -sidewayVelocity, Color.red);
+        Debug.DrawRay(transform.position, transform.forward * Traction, Color.blue);
+        carRb.AddForceAtPosition(transform.right * Traction * sidewayVelocity, transform.position);
 
     }
 

@@ -581,7 +581,7 @@ GameObject:
   m_Component:
   - component: {fileID: 308931721}
   m_Layer: 0
-  m_Name: FrontLeftPt
+  m_Name: FrontRightPt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2953,8 +2953,8 @@ Rigidbody:
   m_GameObject: {fileID: 862054947}
   serializedVersion: 2
   m_Mass: 1
-  m_Drag: 2
-  m_AngularDrag: 0.05
+  m_Drag: 2.5
+  m_AngularDrag: 5
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
@@ -3032,7 +3032,7 @@ Transform:
   m_GameObject: {fileID: 862054947}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -30.22515, y: 8.88, z: -22.242838}
-  m_LocalScale: {x: 5, y: 1, z: 3}
+  m_LocalScale: {x: 3, y: 1, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1736354634}
@@ -3062,6 +3062,9 @@ MonoBehaviour:
   SuspensionDistance: 0.5
   SuspensionStrength: 100
   SuspensionDamping: 2
+  AccelPower: 150
+  TorquePower: 50
+  Traction: 10
 --- !u!1 &884371440
 GameObject:
   m_ObjectHideFlags: 0
@@ -3663,7 +3666,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1479947391}
   m_Layer: 0
-  m_Name: BackLeftPt
+  m_Name: FrontLeftPt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3695,7 +3698,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1736354634}
   m_Layer: 0
-  m_Name: FrontRightPt
+  m_Name: BackRightPt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5780,7 +5783,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1807917648}
   m_Layer: 0
-  m_Name: BackRightPt
+  m_Name: BackLeftPt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
