@@ -72,6 +72,8 @@ public class CarController : MonoBehaviour
     void FixedUpdate()
     {
 
+        bool oneWheelInGround = false;
+
         for( int i = 0; i < SuspensionPoints.Length; i++)
         {
             GameObject suspensionPt = SuspensionPoints[i];
@@ -100,6 +102,8 @@ public class CarController : MonoBehaviour
                 SuspensionCache[i].impactNormal = hit.normal;
             }
 
+            oneWheelInGround |= didWeHit;
+
         }
 
 
@@ -109,7 +113,7 @@ public class CarController : MonoBehaviour
         Vector3 projForward = Vector3.ProjectOnPlane(transform.forward, normal);
 
         // TODO : ACCELERATE ONLY WHEN BACK WHEELS ARE HITING THE GROUND
-        if (isAccel)
+        if (isAccel && oneWheelInGround)
         {
             // Will just apply some force here
             // But i think it needs more work, because it takes time for a vehicle to reach max speed
@@ -117,7 +121,7 @@ public class CarController : MonoBehaviour
             carRb.AddForceAtPosition(projForward * AccelPower, transform.position); // Center of mass is center of vehicle CURRENTLY
         }
 
-        if (isBrake)
+        if (isBrake && oneWheelInGround)
         {
             carRb.AddForceAtPosition(-projForward * AccelPower, transform.position); // Center of mass is center of vehicle CURRENTLY
         }
