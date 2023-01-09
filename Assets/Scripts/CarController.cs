@@ -110,6 +110,7 @@ public class CarController : MonoBehaviour
         Vector3 normal = SuspensionCache[0].impactNormal;
         Vector3 projForward = Vector3.ProjectOnPlane(transform.forward, normal);
 
+        // TODO : ACCELERATE ONLY WHEN BACK WHEELS ARE HITING THE GROUND
         if (isAccel)
         {
             // Will just apply some force here
