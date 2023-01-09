@@ -201,7 +201,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 33100361}
-  m_LocalRotation: {x: 0.18910752, y: -0.000000018890205, z: 0.0000000036379215, w: 0.9819564}
+  m_LocalRotation: {x: 0.18910752, y: 0.000000018890209, z: -0.0000000036379222, w: 0.9819564}
   m_LocalPosition: {x: -30.22515, y: 14.88, z: -37.242836}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3068,7 +3068,7 @@ GameObject:
   - component: {fileID: 862054948}
   - component: {fileID: 862054953}
   m_Layer: 0
-  m_Name: Vehicule
+  m_Name: Vehicle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3189,7 +3189,7 @@ MonoBehaviour:
   - {fileID: 308931720}
   - {fileID: 1479947390}
   - {fileID: 1807917647}
-  SuspensionDistance: 0.5
+  SuspensionDistance: 0.6
   SuspensionStrength: 100
   SuspensionDamping: 2
   AccelPower: 120
@@ -8196,7 +8196,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2087352295}
-  m_LocalRotation: {x: 0.18910752, y: -0.000000018890205, z: 0.0000000036379215, w: 0.9819564}
+  m_LocalRotation: {x: 0.18910752, y: 0.000000018890209, z: -0.0000000036379222, w: 0.9819564}
   m_LocalPosition: {x: -30.22515, y: 14.88, z: -37.242836}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

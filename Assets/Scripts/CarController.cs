@@ -27,8 +27,6 @@ public class CarController : MonoBehaviour
 
     public float TorquePower = 50.0f;
 
-    public float Traction = 10.0f; // Slip reduction
-
     // Input state
     bool isAccel = false;
     bool isBrake = false;
