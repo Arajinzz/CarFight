@@ -23,7 +23,9 @@ public class CarController : MonoBehaviour
     private Ray[] SuspensionDebugRays;
     private RaycastHit[] SuspensionDebugHit;
 
-    public float AccelPower = 100.0f;
+    public float AccelPower = 5.0f;
+    public float TopCarForce = 100.0f;
+    private float CarCurrentForce;
 
     public float TorquePower = 50.0f;
 
@@ -36,6 +38,7 @@ public class CarController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        CarCurrentForce = 0.0f;
 
         SuspensionDebugHit = new RaycastHit[SuspensionPoints.Length];
         SuspensionDebugRays = new Ray[SuspensionPoints.Length];
@@ -115,10 +118,8 @@ public class CarController : MonoBehaviour
         // TODO : ACCELERATE ONLY WHEN BACK WHEELS ARE HITING THE GROUND
         if (isAccel && oneWheelInGround)
         {
-            // Will just apply some force here
-            // But i think it needs more work, because it takes time for a vehicle to reach max speed
-            // So i think it needs a rework (a way to properly simulate acceleration)
-            carRb.AddForceAtPosition(projForward * AccelPower, transform.position); // Center of mass is center of vehicle CURRENTLY
+            CarCurrentForce = Mathf.MoveTowards(CarCurrentForce, TopCarForce, AccelPower * Time.fixedDeltaTime);
+            carRb.AddForceAtPosition(projForward * CarCurrentForce, transform.position); // Center of mass is center of vehicle CURRENTLY
         }
 
         if (isBrake && oneWheelInGround)
