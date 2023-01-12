@@ -29,6 +29,9 @@ public class CarController : MonoBehaviour
 
     public float TorquePower = 50.0f;
 
+    // Falling
+    public float Gravity = -9.81f;
+
     // Input state
     bool isAccel = false;
     bool isBrake = false;
@@ -137,6 +140,11 @@ public class CarController : MonoBehaviour
             carRb.AddTorque(transform.up * TorquePower);
         }
 
+
+        // Manually apply gravity
+        Vector3 _velo = carRb.velocity;
+        _velo.y += Gravity * Time.fixedDeltaTime;
+        carRb.velocity = _velo;
     }
 
     void OnDrawGizmos()
