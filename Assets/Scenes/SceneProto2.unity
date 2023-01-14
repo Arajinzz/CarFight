@@ -201,7 +201,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 33100361}
-  m_LocalRotation: {x: 0.18910752, y: 0.000000018890209, z: -0.0000000036379222, w: 0.9819564}
+  m_LocalRotation: {x: 0.18910752, y: -0.000000018890205, z: 0.0000000036379215, w: 0.9819564}
   m_LocalPosition: {x: -30.22515, y: 14.88, z: -37.242836}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3192,33 +3192,10 @@ MonoBehaviour:
   SuspensionDistance: 0.6
   SuspensionStrength: 100
   SuspensionDamping: 2
-  ForceCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: -0.012500763
-      value: 0.50234985
-      inSlope: 2
-      outSlope: 2
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   AccelPower: 80
   TopCarForce: 120
   TorquePower: 40
+  drag: 2.5
 --- !u!1 &884371440
 GameObject:
   m_ObjectHideFlags: 0
@@ -8205,6 +8182,13 @@ MonoBehaviour:
     LensShift: {x: 0, y: 0}
     GateFit: 2
     m_SensorSize: {x: 1, y: 1}
+    Iso: 200
+    ShutterSpeed: 0.005
+    Aperture: 16
+    BladeCount: 5
+    Curvature: {x: 2, y: 11}
+    BarrelClipping: 0.25
+    Anamorphism: 0
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -8220,7 +8204,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2087352295}
-  m_LocalRotation: {x: 0.18910752, y: 0.000000018890209, z: -0.0000000036379222, w: 0.9819564}
+  m_LocalRotation: {x: 0.18910752, y: -0.000000018890205, z: 0.0000000036379215, w: 0.9819564}
   m_LocalPosition: {x: -30.22515, y: 14.88, z: -37.242836}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
