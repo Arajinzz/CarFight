@@ -185,8 +185,20 @@ public class SteamLobbyManager : MonoBehaviour
     // Which means when i leave it will not get executed 
     private void OnLobbyMemberLeaveCallback(Lobby lobby, Friend member)
     {
-        
 
+        // The idea is when a member leaves the lobby
+        // All users in lobby will execute this
+        SteamManager.Instance.CloseP2P(member.Id);
+        Debug.Log("Player left");
+        Debug.Log("The owner is : " + CurrentLobby.Owner.Id);
+
+        GameObject manager = GameObject.Find("GameManager");
+        if (manager != null)
+        {
+            Debug.Log("Game Manager Found");
+            // TODO LATER
+            // manager.GetComponent<GameManager>().RemovePlayerFromList(member.Id);
+        }
 
     }
 
