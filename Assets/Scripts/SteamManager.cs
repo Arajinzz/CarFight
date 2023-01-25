@@ -50,4 +50,19 @@ public class SteamManager : MonoBehaviour
 
     }
 
+
+    private void Update()
+    {
+
+        SteamClient.RunCallbacks();
+
+    }
+
+    private void OnApplicationQuit()
+    {
+
+        SteamClient.Shutdown();
+
+    }
+
 }
