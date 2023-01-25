@@ -131,12 +131,12 @@ public class CarController : MonoBehaviour
             carRb.AddForceAtPosition(-projForward * AccelPower, transform.position); // Center of mass is center of vehicle CURRENTLY
         }
 
-        if (isTurningLeft && oneWheelInGround)
+        if (isTurningLeft)
         {
             carRb.AddTorque(-transform.up * TorquePower);
         }
 
-        if (isTurningRight && oneWheelInGround)
+        if (isTurningRight)
         {
             carRb.AddTorque(transform.up * TorquePower);
         }
