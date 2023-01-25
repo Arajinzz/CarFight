@@ -10,6 +10,10 @@ public class SteamManager : MonoBehaviour
 
     private static uint AppId = 480u;
 
+    public string PlayerName { get; set; }
+
+    public SteamId PlayerId { get; set; }
+
     private void Awake()
     {
         
@@ -27,6 +31,10 @@ public class SteamManager : MonoBehaviour
                 {
                     throw new Exception("Steam client not valid");
                 }
+
+                PlayerName = SteamClient.Name;
+                PlayerId = SteamClient.SteamId;
+
             } catch (Exception e)
             {
                 Debug.Log(e);
