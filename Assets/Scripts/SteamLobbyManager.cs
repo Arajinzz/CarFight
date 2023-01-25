@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Steamworks;
 using Steamworks.Data;
 using UnityEngine;
@@ -56,6 +57,35 @@ public class SteamLobbyManager : MonoBehaviour
         SteamNetworking.OnP2PSessionRequest -= OnP2PSessionRequestCallback;
         SceneManager.sceneLoaded -= OnSceneLoadedCallback;
     }
+
+    public async Task<bool> CreateLobby(int maxPlayers, string gameName)
+    {
+
+        
+        return true;
+
+    }
+
+    public async Task<bool> JoinLobby(Lobby lobby)
+    {
+        
+        return true;
+    }
+
+    public void LeaveLobby()
+    {
+        
+
+
+    }
+
+    public async Task<bool> SearchLobbies(string gameName)
+    {
+
+        return true;
+
+    }
+
 
     #endregion
 
