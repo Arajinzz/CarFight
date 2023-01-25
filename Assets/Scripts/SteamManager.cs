@@ -18,8 +18,23 @@ public class SteamManager : MonoBehaviour
             DontDestroyOnLoad(this);
             Instance = this;
 
+            try
+            {
+                SteamClient.RestartAppIfNecessary(AppId);
+                SteamClient.Init(AppId, true);
 
+                if (!SteamClient.IsValid)
+                {
+                    throw new Exception("Steam client not valid");
+                }
+            } catch (Exception e)
+            {
+                Debug.Log(e);
+            }
 
+        } else if (Instance != this)
+        {
+            Destroy(gameObject);
         }
 
     }
