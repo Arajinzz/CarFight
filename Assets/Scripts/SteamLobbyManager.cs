@@ -258,7 +258,8 @@ public class SteamLobbyManager : MonoBehaviour
 
     private void OnP2PSessionRequestCallback(SteamId user)
     {
-
+        Debug.Log("P2P Request from " + user.ToString());
+        SteamManager.Instance.AcceptP2P(user);
     }
 
     // Executed when a scene is loaded
