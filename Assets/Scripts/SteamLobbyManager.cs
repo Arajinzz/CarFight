@@ -253,7 +253,7 @@ public class SteamLobbyManager : MonoBehaviour
     private void OnChatMessageCallback(Lobby lobby, Friend friend, string message)
     {
         // Received chat message
-        
+        Debug.Log($"{friend.Name}: {message}");
     }
 
     private void OnP2PSessionRequestCallback(SteamId user)
