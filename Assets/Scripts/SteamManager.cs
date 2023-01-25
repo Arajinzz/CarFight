@@ -65,4 +65,31 @@ public class SteamManager : MonoBehaviour
 
     }
 
+    public void AcceptP2P(SteamId user)
+    {
+        try
+        {
+            // For two players to send P2P packets to each other, they each must call this on the other player
+            bool success = SteamNetworking.AcceptP2PSessionWithUser(user);
+            if (success) Debug.Log("P2P session accepted with " + user.ToString());
+        }
+        catch
+        {
+            Debug.Log("Unable to accept P2P Session with user");
+        }
+    }
+
+    public void CloseP2P(SteamId user)
+    {
+        try
+        {
+            // For two players to send P2P packets to each other, they each must call this on the other player
+            SteamNetworking.CloseP2PSessionWithUser(user);
+        }
+        catch
+        {
+            Debug.Log("Unable to close P2P Session with user");
+        }
+    }
+
 }
