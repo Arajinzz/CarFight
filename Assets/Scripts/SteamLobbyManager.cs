@@ -70,8 +70,28 @@ public class SteamLobbyManager : MonoBehaviour
     public async Task<bool> CreateLobby(int maxPlayers, string gameName)
     {
 
-        
-        return true;
+        try
+        {
+            var lobbyOut = await SteamMatchmaking.CreateLobbyAsync(maxPlayers);
+
+            if (!lobbyOut.HasValue)
+            {
+                throw new System.Exception("Lobby created but not instantiated correctly");
+            }
+
+            lobbyOut.Value.SetPublic();
+            lobbyOut.Value.SetJoinable(true);
+            lobbyOut.Value.SetData("GameName", gameName);
+
+            return true;
+
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log(e);
+        }
+
+        return false;
 
     }
 
