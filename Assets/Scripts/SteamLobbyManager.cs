@@ -177,7 +177,7 @@ public class SteamLobbyManager : MonoBehaviour
     private void OnLobbyMemberDisconnectedCallback(Lobby lobby, Friend member)
     {
 
-
+        SteamManager.Instance.CloseP2P(member.Id);
 
     }
 
