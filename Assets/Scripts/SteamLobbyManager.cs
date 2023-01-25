@@ -2,6 +2,7 @@ using System;
 using Steamworks;
 using Steamworks.Data;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SteamLobbyManager : MonoBehaviour
 {
@@ -35,6 +36,7 @@ public class SteamLobbyManager : MonoBehaviour
         SteamMatchmaking.OnLobbyGameCreated += OnLobbyGameCreatedCallback;
         SteamMatchmaking.OnChatMessage += OnChatMessageCallback;
         SteamNetworking.OnP2PSessionRequest += OnP2PSessionRequestCallback;
+        SceneManager.sceneLoaded += OnSceneLoadedCallback;
 
     }
 
