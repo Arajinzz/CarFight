@@ -127,7 +127,27 @@ public class SteamLobbyManager : MonoBehaviour
     public async Task<bool> SearchLobbies(string gameName)
     {
 
-        return true;
+        try
+        {
+            LobbiesResult.Clear();
+            Lobby[] lobbies = await SteamMatchmaking.LobbyList.WithMaxResults(20)
+                                                              .WithKeyValue("GameName", gameName)
+                                                              .RequestAsync();
+            if (lobbies != null)
+            {
+                foreach (Lobby lobby in lobbies.ToList())
+                {
+                    LobbiesResult.Add(lobby);
+                }
+            }
+            return true;
+        }
+        catch (System.Exception e)
+        {
+            Debug.Log(e);
+        }
+
+        return false;
 
     }
 
