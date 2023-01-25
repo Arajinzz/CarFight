@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using Steamworks.Data;
 using UnityEngine;
@@ -9,6 +9,8 @@ public class TemporarySceneManager : MonoBehaviour
     // Start is called before the first frame update
     async void Start()
     {
+        bool state = false;
+
         try
         {
             await SteamLobbyManager.Instance.SearchLobbies("JustTesting");
@@ -17,13 +19,19 @@ public class TemporarySceneManager : MonoBehaviour
 
             if (lobbiesFound != null && lobbiesFound.Count > 0)
             {
-                await SteamLobbyManager.Instance.JoinLobby(lobbiesFound[0]);
+                state = await SteamLobbyManager.Instance.JoinLobby(lobbiesFound[0]);
             } else
             {
-                await SteamLobbyManager.Instance.CreateLobby(4, "JustTesting");
+                state = await SteamLobbyManager.Instance.CreateLobby(4, "JustTesting");
             }
 
-        } catch
+        } catch (Exception e)
+        {
+            Debug.Log(e);
+            state = false;
+        }
+
+        if (!state)
         {
             SceneManager.LoadScene(1);
         }

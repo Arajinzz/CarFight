@@ -40,6 +40,7 @@ public class SteamManager : MonoBehaviour
 
             } catch (Exception e)
             {
+                Destroy(gameObject);
                 Debug.Log(e);
             }
 
