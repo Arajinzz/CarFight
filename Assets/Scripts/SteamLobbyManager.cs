@@ -22,4 +22,20 @@ public class SteamLobbyManager : MonoBehaviour
 
     }
 
+
+    private void Start()
+    {
+
+        SteamMatchmaking.OnLobbyCreated += OnLobbyCreatedCallback;
+        SteamMatchmaking.OnLobbyMemberDisconnected += OnLobbyMemberDisconnectedCallback;
+        SteamMatchmaking.OnLobbyMemberLeave += OnLobbyMemberLeaveCallback;
+        SteamMatchmaking.OnLobbyMemberJoined += OnLobbyMemberJoinedCallback;
+        SteamMatchmaking.OnLobbyEntered += OnLobbyEnteredCallback;
+        SteamMatchmaking.OnLobbyInvite += OnLobbyInviteCallback;
+        SteamMatchmaking.OnLobbyGameCreated += OnLobbyGameCreatedCallback;
+        SteamMatchmaking.OnChatMessage += OnChatMessageCallback;
+        SteamNetworking.OnP2PSessionRequest += OnP2PSessionRequestCallback;
+
+    }
+
 }
