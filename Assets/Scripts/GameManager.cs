@@ -35,6 +35,9 @@ public class GameManager : MonoBehaviour
                 HostingTxt.SetText("Client");
             }
 
+        } else
+        {
+            LobbyIdTxt.SetText("Offline");
         }
     }
 }
