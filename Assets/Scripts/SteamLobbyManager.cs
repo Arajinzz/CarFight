@@ -205,7 +205,14 @@ public class SteamLobbyManager : MonoBehaviour
     // Executed when a member joins the lobby
     private void OnLobbyMemberJoinedCallback(Lobby lobby, Friend member)
     {
-        
+        // The idea is when a member joins a lobby
+        // All users in lobby will execute this
+        SteamManager.Instance.AcceptP2P(member.Id);
+
+        if (CurrentLobby.GetData("GameState").Equals("Started"))
+        {
+            // Means game started
+        }
     }
 
     // Executed when we enter the lobby
