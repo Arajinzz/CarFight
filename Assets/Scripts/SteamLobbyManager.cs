@@ -1,4 +1,6 @@
-using System;
+using System.Linq;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Steamworks;
 using Steamworks.Data;
@@ -10,6 +12,12 @@ public class SteamLobbyManager : MonoBehaviour
 
     public static SteamLobbyManager Instance;
 
+    // Lobby currently joined
+    public Lobby CurrentLobby { get; set; }
+
+    // Here resides the lobby search result
+    public List<Lobby> LobbiesResult;
+
     private void Awake()
     {
         
@@ -17,6 +25,7 @@ public class SteamLobbyManager : MonoBehaviour
         {
             DontDestroyOnLoad(this);
             Instance = this;
+            LobbiesResult = new List<Lobby>();
         } else if (Instance != this)
         {
             Destroy(gameObject);
