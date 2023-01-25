@@ -51,6 +51,11 @@ public class SteamLobbyManager : MonoBehaviour
     }
 
 
+    private void OnApplicationQuit()
+    {
+        CleanUp();
+    }
+
     #region Help functions
 
     private void CleanUp()
