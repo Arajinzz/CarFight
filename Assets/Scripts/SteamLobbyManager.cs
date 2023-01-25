@@ -240,8 +240,13 @@ public class SteamLobbyManager : MonoBehaviour
     // When Game is started
     private void OnLobbyGameCreatedCallback(Lobby lobby, uint ip, ushort port, SteamId gameServerId)
     {
-        // Load game scene
+        Debug.Log("Game is Started by: " + gameServerId.ToString());
 
+        CurrentLobby.SetData("GameState", "Started");
+        CurrentLobby.SetData("ServerTick", "0");
+
+        // Probably we have to load a game scene here
+        // SceneManager.LoadScene(N);
     }
 
     // Executed when we receive a chat message
