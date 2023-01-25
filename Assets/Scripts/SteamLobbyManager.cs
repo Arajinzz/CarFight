@@ -218,8 +218,17 @@ public class SteamLobbyManager : MonoBehaviour
     // Executed when we enter the lobby
     private void OnLobbyEnteredCallback(Lobby lobby)
     {
-        
 
+        CurrentLobby = lobby;
+
+        if (CurrentLobby.GetData("GameState").Equals("Started"))
+        {
+            // Means game started
+            // Probably we have to load some scene here
+            // SceneManager.LoadScene(N);
+        }
+
+        // TODO: load maybe lobby scene
 
     }
 
