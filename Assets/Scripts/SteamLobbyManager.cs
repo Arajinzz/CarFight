@@ -160,8 +160,15 @@ public class SteamLobbyManager : MonoBehaviour
     // Executed when a lobby is created
     private void OnLobbyCreatedCallback(Result result, Lobby lobby)
     {
-        
 
+        if (result == Result.OK)
+        {
+            CurrentLobby = lobby;
+            CurrentLobby.SetData("GameState", "Waiting");
+
+            // TEMPORARY: START GAME IMMEDIATLY
+            CurrentLobby.SetGameServer(SteamManager.Instance.PlayerId);
+        }
 
     }
 
