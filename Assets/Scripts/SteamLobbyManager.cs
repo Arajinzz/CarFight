@@ -97,7 +97,12 @@ public class SteamLobbyManager : MonoBehaviour
 
     public async Task<bool> JoinLobby(Lobby lobby)
     {
-        
+
+        RoomEnter joinedLobbySuccess = await lobby.Join();
+        if (joinedLobbySuccess != RoomEnter.Success)
+        {
+            return false;
+        }
         return true;
     }
 
