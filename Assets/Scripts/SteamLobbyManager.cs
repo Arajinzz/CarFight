@@ -108,8 +108,19 @@ public class SteamLobbyManager : MonoBehaviour
 
     public void LeaveLobby()
     {
-        
 
+        try
+        {
+            CurrentLobby.Leave();
+        }
+        catch
+        {
+            return;
+        }
+
+        // Left Successfully
+        // Maybe we want to load another scene
+        // SceneManager.LoadScene(N);
 
     }
 
