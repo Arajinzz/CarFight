@@ -35,6 +35,9 @@ public class SteamManager : MonoBehaviour
                 PlayerName = SteamClient.Name;
                 PlayerId = SteamClient.SteamId;
 
+                SteamNetworkingUtils.InitRelayNetworkAccess();
+                SteamNetworking.AllowP2PPacketRelay(true);
+
             } catch (Exception e)
             {
                 Debug.Log(e);
