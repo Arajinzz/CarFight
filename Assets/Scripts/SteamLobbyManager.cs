@@ -53,13 +53,6 @@ public class SteamLobbyManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        CleanUp();
-    }
-
-    #region Help functions
-
-    private void CleanUp()
-    {
         SteamMatchmaking.OnLobbyCreated -= OnLobbyCreatedCallback;
         SteamMatchmaking.OnLobbyMemberDisconnected -= OnLobbyMemberDisconnectedCallback;
         SteamMatchmaking.OnLobbyMemberLeave -= OnLobbyMemberLeaveCallback;
@@ -71,6 +64,8 @@ public class SteamLobbyManager : MonoBehaviour
         SteamNetworking.OnP2PSessionRequest -= OnP2PSessionRequestCallback;
         SceneManager.sceneLoaded -= OnSceneLoadedCallback;
     }
+
+    #region Help functions
 
     public async Task<bool> CreateLobby(int maxPlayers, string gameName)
     {
