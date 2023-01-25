@@ -40,4 +40,30 @@ public class SteamLobbyManager : MonoBehaviour
 
     }
 
+
+
+
+    #region Help functions
+
+    private void CleanUp()
+    {
+        SteamMatchmaking.OnLobbyCreated -= OnLobbyCreatedCallback;
+        SteamMatchmaking.OnLobbyMemberDisconnected -= OnLobbyMemberDisconnectedCallback;
+        SteamMatchmaking.OnLobbyMemberLeave -= OnLobbyMemberLeaveCallback;
+        SteamMatchmaking.OnLobbyMemberJoined -= OnLobbyMemberJoinedCallback;
+        SteamMatchmaking.OnLobbyEntered -= OnLobbyEnteredCallback;
+        SteamMatchmaking.OnLobbyInvite -= OnLobbyInviteCallback;
+        SteamMatchmaking.OnLobbyGameCreated -= OnLobbyGameCreatedCallback;
+        SteamMatchmaking.OnChatMessage -= OnChatMessageCallback;
+        SteamNetworking.OnP2PSessionRequest -= OnP2PSessionRequestCallback;
+        SceneManager.sceneLoaded -= OnSceneLoadedCallback;
+    }
+
+    #endregion
+
+
+
+
+
+
 }
