@@ -225,7 +225,7 @@ public class SteamLobbyManager : MonoBehaviour
         {
             // Means game started
             // Probably we have to load some scene here
-            // SceneManager.LoadScene(N);
+            SceneManager.LoadScene(1);
         }
 
         // TODO: load maybe lobby scene
@@ -246,7 +246,7 @@ public class SteamLobbyManager : MonoBehaviour
         CurrentLobby.SetData("ServerTick", "0");
 
         // Probably we have to load a game scene here
-        // SceneManager.LoadScene(N);
+        SceneManager.LoadScene(1);
     }
 
     // Executed when we receive a chat message
