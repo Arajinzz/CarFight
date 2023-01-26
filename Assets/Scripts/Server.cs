@@ -24,6 +24,8 @@ public class Server : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Physics.autoSimulation = false;
+
         serverTimer = 0.0f;
         serverTick = 0;
         minTimeBetweenTicks = 1 / SERVER_TICK_RATE;

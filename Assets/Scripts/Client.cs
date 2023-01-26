@@ -133,8 +133,21 @@ public class Client : MonoBehaviour
             {
                 SteamId playerId = packet.PopUInt64();
                 Structs.StateMessage stateMsg = packet.PopStateMessage();
-                
+
                 // Handle Correction Here
+                if (gameManager.PlayerList.ContainsKey(playerId))
+                {
+                    GameObject _player = gameManager.PlayerList[playerId];
+                    Rigidbody _playerRb = _player.GetComponent<Rigidbody>();
+
+                    _player.transform.position = new Vector3(stateMsg.position.x, stateMsg.position.y, stateMsg.position.z);
+                    _player.transform.rotation = new Quaternion(stateMsg.rotation.x, stateMsg.rotation.y, stateMsg.rotation.z, stateMsg.rotation.w);
+
+                    _playerRb.velocity = new Vector3(stateMsg.velocity.x, stateMsg.velocity.y, stateMsg.velocity.z);
+                    _playerRb.angularVelocity = new Vector3(stateMsg.angular_velocity.x, stateMsg.angular_velocity.y, stateMsg.angular_velocity.z);
+                    _playerRb.drag = stateMsg.drag;
+                    _playerRb.angularDrag = stateMsg.angular_drag;
+                }
             }
 
         }
