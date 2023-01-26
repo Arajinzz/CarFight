@@ -16,7 +16,6 @@ public class Structs
 
     public struct InputMessage
     {
-        public float delivery_time;
         public uint tick_number;
         public Inputs inputs;
     }
@@ -30,7 +29,6 @@ public class Structs
 
     public struct StateMessage
     {
-        public float delivery_time;
         public uint tick_number;
         public Vector3 position; // 12 bytes
         public Quaternion rotation; // 16 bytes

@@ -149,6 +149,14 @@ public class Packet
         InsertFloat(stateMsg.rotation.z);
         InsertFloat(stateMsg.rotation.w);
 
+        InsertFloat(stateMsg.velocity.x);
+        InsertFloat(stateMsg.velocity.y);
+        InsertFloat(stateMsg.velocity.z);
+
+        InsertFloat(stateMsg.angular_velocity.x);
+        InsertFloat(stateMsg.angular_velocity.y);
+        InsertFloat(stateMsg.angular_velocity.z);
+
     }
 
     public Structs.StateMessage PopStateMessage()
@@ -157,6 +165,8 @@ public class Packet
         stateMsg.tick_number = PopUInt32();
         stateMsg.position = new Vector3(PopFloat(), PopFloat(), PopFloat());
         stateMsg.rotation = new Quaternion(PopFloat(), PopFloat(), PopFloat(), PopFloat());
+        stateMsg.velocity = new Vector3(PopFloat(), PopFloat(), PopFloat());
+        stateMsg.angular_velocity = new Vector3(PopFloat(), PopFloat(), PopFloat());
 
         return stateMsg;
     }
