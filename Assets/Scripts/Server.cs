@@ -11,7 +11,7 @@ public class Server : MonoBehaviour
     public uint serverTick;
     private float minTimeBetweenTicks;
     private const float SERVER_TICK_RATE = 60f;
-    
+
     private Queue<P2Packet?> receivedPackets;
 
     private Lobby currentLobby;
@@ -49,7 +49,8 @@ public class Server : MonoBehaviour
             return;
         }
 
-        
+        // Receive packets ASAP
+        ReceivePackets();
 
         serverTimer += Time.deltaTime;
 
@@ -61,10 +62,22 @@ public class Server : MonoBehaviour
             if (SteamManager.Instance)
                 currentLobby.SetData("ServerTick", serverTick.ToString());
 
-            
+            HandleTick();
 
             serverTick++;
         }
 
     }
+
+
+    private void HandleTick()
+    {
+
+    }
+
+    private void ReceivePackets()
+    {
+
+    }
+
 }
