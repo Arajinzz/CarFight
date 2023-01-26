@@ -73,6 +73,34 @@ public class Server : MonoBehaviour
     private void HandleTick()
     {
 
+        // handle received packets
+        while (receivedPackets.Count > 0)
+        {
+            var recPacket = receivedPackets.Dequeue();
+            var packet = new Packet(recPacket.Value.Data);
+
+            if (packet.GetPacketType() == Packet.PacketType.InstantiatePlayer)
+            {
+                packet.InsertUInt64(recPacket.Value.SteamId);
+
+                P2Packet packetToSend;
+                packetToSend.SteamId = recPacket.Value.SteamId;
+                packetToSend.Data = packet.buffer.ToArray();
+
+                // Send to all players
+                SendToAllLobby(packetToSend);
+
+                // Send all players to target
+            }
+            else if (packet.GetPacketType() == Packet.PacketType.InputMessage)
+            {
+                Structs.InputMessage inputMsg = packet.PopInputMessage();
+                // Mouvement replication goes here
+            }
+
+        }
+
+
     }
 
     private void ReceivePackets()
