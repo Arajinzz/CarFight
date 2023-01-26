@@ -36,4 +36,64 @@ public class Packet
         return (PacketType)packetType;
     }
 
+    public void InsertBool(bool data)
+    {
+        buffer.AddRange(BitConverter.GetBytes(data));
+    }
+
+    public bool PopBool()
+    {
+        bool data = BitConverter.ToBoolean(buffer.GetRange(offset, sizeof(bool)).ToArray());
+        offset += sizeof(bool);
+        return data;
+    }
+
+    public void InsertInt(int data)
+    {
+        buffer.AddRange(BitConverter.GetBytes(data));
+    }
+
+    public int PopInt()
+    {
+        int data = BitConverter.ToInt32(buffer.GetRange(offset, sizeof(int)).ToArray());
+        offset += sizeof(int);
+        return data;
+    }
+
+    public void InsertUInt32(UInt32 data)
+    {
+        buffer.AddRange(BitConverter.GetBytes(data));
+    }
+
+    public UInt32 PopUInt32()
+    {
+        UInt32 data = BitConverter.ToUInt32(buffer.GetRange(offset, sizeof(UInt32)).ToArray());
+        offset += sizeof(UInt32);
+        return data;
+    }
+
+    public void InsertUInt64(UInt64 data)
+    {
+        buffer.AddRange(BitConverter.GetBytes(data));
+    }
+
+    public UInt64 PopUInt64()
+    {
+        UInt64 data = BitConverter.ToUInt64(buffer.GetRange(offset, sizeof(UInt64)).ToArray());
+        offset += sizeof(UInt64);
+        return data;
+    }
+
+    public void InsertFloat(float data)
+    {
+        buffer.AddRange(BitConverter.GetBytes(data));
+    }
+
+    public float PopFloat()
+    {
+        float data = BitConverter.ToSingle(buffer.GetRange(offset, sizeof(float)).ToArray());
+        offset += sizeof(float);
+        return data;
+    }
+
 }
