@@ -110,7 +110,32 @@ public class Server : MonoBehaviour
             else if (packet.GetPacketType() == Packet.PacketType.InputMessage)
             {
                 Structs.InputMessage inputMsg = packet.PopInputMessage();
+
                 // Mouvement replication goes here
+                GameObject whatPlayer = gameManager.PlayerList[recPacket.Value.SteamId];
+                CarController whatPlayerController = whatPlayer.GetComponent<CarController>();
+                Rigidbody PlayerRb = whatPlayer.GetComponent<Rigidbody>();
+
+                // Make the mouvement
+                whatPlayerController.ProcessMouvement(inputMsg.inputs, minTimeBetweenTicks);
+                Physics.Simulate(minTimeBetweenTicks);
+
+                Structs.StateMessage stateMsg;
+                stateMsg.tick_number = inputMsg.tick_number + 1;
+                stateMsg.position = whatPlayer.transform.position;
+                stateMsg.rotation = whatPlayer.transform.rotation;
+                stateMsg.velocity = PlayerRb.velocity;
+                stateMsg.angular_velocity = PlayerRb.angularVelocity;
+
+                var statePacket = new Packet(Packet.PacketType.StateMessage);
+                statePacket.InsertUInt64(recPacket.Value.SteamId);
+                statePacket.InsertStateMessage(stateMsg);
+
+                P2Packet packetToSend;
+                packetToSend.SteamId = recPacket.Value.SteamId;
+                packetToSend.Data = statePacket.buffer.ToArray();
+
+                SendToAllLobby(packetToSend);
             }
 
         }
