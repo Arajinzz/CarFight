@@ -508,6 +508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 438c68e725e7c7c40b812d72cdb22de3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FollowCamera: {fileID: 0}
   SuspensionPoints:
   - {fileID: 4513166476835155073}
   - {fileID: 4513166477018442560}

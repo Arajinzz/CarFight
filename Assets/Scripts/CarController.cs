@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class CarController : MonoBehaviour
 {
+
+    [SerializeField]
+    CinemachineVirtualCamera FollowCamera;
 
     private struct SuspensionParams
     {
@@ -41,6 +45,7 @@ public class CarController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         CarCurrentForce = 0.0f;
 
         SuspensionDebugHit = new RaycastHit[SuspensionPoints.Length];
@@ -146,6 +151,14 @@ public class CarController : MonoBehaviour
             carRb.drag = 0;
         }
 
+    }
+
+    public void SetCamera()
+    {
+        // Bind virtual camera
+        FollowCamera = GameObject.Find("VCam").GetComponent<CinemachineVirtualCamera>();
+        FollowCamera.Follow = transform;
+        FollowCamera.LookAt = transform;
     }
 
     void OnDrawGizmos()

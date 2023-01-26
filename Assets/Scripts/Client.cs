@@ -119,6 +119,7 @@ public class Client : MonoBehaviour
                 if (playerId == SteamManager.Instance.PlayerId)
                 {
                     localPlayer = playerObj.GetComponent<CarController>();
+                    localPlayer.SetCamera(); // Set the camera
                     gameManager.AddPlayerToList(playerId, localPlayer.gameObject);
                 }
                 else
