@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using Steamworks;
 using Steamworks.Data;
@@ -36,6 +36,35 @@ public class Server : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (SteamLobbyManager.Instance && SteamLobbyManager.Instance.CurrentLobby.Owner.Id != owner.Id)
+        {
+            // Means owner changed, server changed
+            owner = currentLobby.Owner;
+            serverTick = Convert.ToUInt32(currentLobby.GetData("ServerTick"));
+        }
+
+        if (SteamLobbyManager.Instance && !owner.IsMe)
+        {
+            return;
+        }
+
         
+
+        serverTimer += Time.deltaTime;
+
+        while (serverTimer >= minTimeBetweenTicks)
+        {
+            serverTimer -= minTimeBetweenTicks;
+
+            // Handle tick here
+            if (SteamManager.Instance)
+                currentLobby.SetData("ServerTick", serverTick.ToString());
+
+            
+
+            serverTick++;
+        }
+
     }
 }
