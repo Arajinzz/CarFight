@@ -75,6 +75,67 @@ public class Client : MonoBehaviour
     private void HandleTick()
     {
 
+        // Get input
+        Structs.Inputs inputs;
+        inputs.up = Input.GetKey(KeyCode.W);
+        inputs.down = Input.GetKey(KeyCode.S);
+        inputs.left = Input.GetKey(KeyCode.A);
+        inputs.right = Input.GetKey(KeyCode.D);
+
+        if (localPlayer)
+        {
+            // if i Am a server let server process
+            // to avoid multiple mouvement process
+            // this probably should be reworked
+            if (owner.Id != SteamManager.Instance.PlayerId)
+            {
+                // Process mouvement here
+            }
+
+            Structs.InputMessage inputMsg;
+            inputMsg.tick_number = clientTick;
+            inputMsg.inputs = inputs;
+
+            var inputPacket = new Packet(Packet.PacketType.InputMessage);
+            inputPacket.InsertInputMessage(inputMsg);
+            SendToServer(inputPacket.buffer.ToArray());
+        }
+
+        // Handle received packets
+        while (receivedPackets.Count > 0)
+        {
+            var recPacket = receivedPackets.Dequeue();
+
+            var packet = new Packet(recPacket.Value.Data);
+
+            if (packet.GetPacketType() == Packet.PacketType.InstantiatePlayer)
+            {
+                Debug.Log("Will instantiate a player ...");
+                GameObject playerObj = Instantiate(playerPrefab, GameObject.Find("SpawnPoint").transform.position, Quaternion.identity);
+                SteamId playerId = packet.PopUInt64();
+                Debug.Log("Received ID : " + playerId);
+
+                // if me set local player to instantiated player
+                if (playerId == SteamManager.Instance.PlayerId)
+                {
+                    localPlayer = playerObj.GetComponent<CarController>();
+                    gameManager.AddPlayerToList(playerId, localPlayer.gameObject);
+                }
+                else
+                {
+                    gameManager.AddPlayerToList(playerId, playerObj.gameObject);
+                }
+            }
+            else if (packet.GetPacketType() == Packet.PacketType.StateMessage)
+            {
+                SteamId playerId = packet.PopUInt64();
+                Structs.StateMessage stateMsg = packet.PopStateMessage();
+                
+                // Handle Correction Here
+            }
+
+        }
+
     }
 
     private void ReceivePackets()
