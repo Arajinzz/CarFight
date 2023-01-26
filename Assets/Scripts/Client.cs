@@ -66,13 +66,13 @@ public class Client : MonoBehaviour
             clientTimer -= minTimeBetweenTicks;
 
             // Handle tick here
-            HandleTick();
+            HandleTick(minTimeBetweenTicks);
 
             clientTick++;
         }
     }
 
-    private void HandleTick()
+    private void HandleTick(float deltaTime)
     {
 
         // Get input
@@ -90,6 +90,8 @@ public class Client : MonoBehaviour
             if (owner.Id != SteamManager.Instance.PlayerId)
             {
                 // Process mouvement here
+                localPlayer.ProcessMouvement(inputs, deltaTime);
+                Physics.Simulate(deltaTime);
             }
 
             Structs.InputMessage inputMsg;

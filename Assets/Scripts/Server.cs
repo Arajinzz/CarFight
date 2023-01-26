@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Steamworks;
 using Steamworks.Data;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Server : MonoBehaviour
 {
@@ -34,6 +35,7 @@ public class Server : MonoBehaviour
             currentLobby = SteamLobbyManager.Instance.CurrentLobby;
             owner = currentLobby.Owner;
         }
+
     }
 
     // Update is called once per frame
