@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
 
     public Dictionary<SteamId, GameObject> PlayerList;
 
+    [SerializeField]
+    GameObject NetManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,14 +38,17 @@ public class GameManager : MonoBehaviour
             if (SteamLobbyManager.Instance.CurrentLobby.Owner.Id.Value == SteamManager.Instance.PlayerId.Value)
             {
                 HostingTxt.SetText("Host");
+                TickTxt.SetText(NetManager.GetComponent<Server>().serverTick.ToString());
             } else
             {
                 HostingTxt.SetText("Client");
+                TickTxt.SetText(NetManager.GetComponent<Client>().clientTick.ToString());
             }
 
         } else
         {
             LobbyIdTxt.SetText("Offline");
+            TickTxt.SetText(NetManager.GetComponent<Server>().serverTick.ToString());
         }
     }
 

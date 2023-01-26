@@ -3390,6 +3390,7 @@ MonoBehaviour:
   LobbyIdTxt: {fileID: 1869657691}
   HostingTxt: {fileID: 1244317157}
   TickTxt: {fileID: 506500030}
+  NetManager: {fileID: 1271378663}
 --- !u!1 &1244317155
 GameObject:
   m_ObjectHideFlags: 0
