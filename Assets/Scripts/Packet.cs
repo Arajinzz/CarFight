@@ -31,6 +31,9 @@ public class Packet
         offset += sizeof(ushort);
     }
 
-
+    public PacketType GetPacketType()
+    {
+        return (PacketType)packetType;
+    }
 
 }
