@@ -94,6 +94,16 @@ public class Server : MonoBehaviour
                 SendToAllLobby(packetToSend);
 
                 // Send all players to target
+                foreach (SteamId id in gameManager.PlayerList.Keys)
+                {
+                    if (id != recPacket.Value.SteamId)
+                    {
+                        Debug.Log("Sending to " + recPacket.Value.SteamId + " ID : " + id);
+                        var newPack = new Packet(Packet.PacketType.InstantiatePlayer);
+                        newPack.InsertUInt64(id);
+                        SendToTarget(recPacket.Value.SteamId, newPack.buffer.ToArray());
+                    }
+                }
             }
             else if (packet.GetPacketType() == Packet.PacketType.InputMessage)
             {
