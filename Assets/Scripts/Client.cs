@@ -79,7 +79,17 @@ public class Client : MonoBehaviour
 
     private void ReceivePackets()
     {
+        if (!SteamManager.Instance)
+            return;
 
+        while (SteamNetworking.IsP2PPacketAvailable())
+        {
+            var packet = SteamNetworking.ReadP2PPacket();
+            if (packet.HasValue)
+            {
+                receivedPackets.Enqueue(packet);
+            }
+        }
     }
 
 
