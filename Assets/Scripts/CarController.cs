@@ -121,7 +121,7 @@ public class CarController : MonoBehaviour
         // TODO : ACCELERATE ONLY WHEN BACK WHEELS ARE HITING THE GROUND
         if (isAccel && oneWheelInGround)
         {
-            CarCurrentForce = Mathf.MoveTowards(CarCurrentForce, TopCarForce, AccelPower * Time.fixedDeltaTime);
+            CarCurrentForce = Mathf.MoveTowards(CarCurrentForce, TopCarForce, AccelPower * deltaTime);
             carRb.AddForceAtPosition(projForward * CarCurrentForce, transform.position); // Center of mass is center of vehicle CURRENTLY
         }
 
@@ -144,6 +144,8 @@ public class CarController : MonoBehaviour
         {
             carRb.drag = 0;
         }
+
+
     }
 
     public void SetCamera()
