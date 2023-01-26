@@ -196,8 +196,7 @@ public class SteamLobbyManager : MonoBehaviour
         if (manager != null)
         {
             Debug.Log("Game Manager Found");
-            // TODO LATER
-            // manager.GetComponent<GameManager>().RemovePlayerFromList(member.Id);
+            manager.GetComponent<GameManager>().RemovePlayerFromList(member.Id);
         }
 
     }
