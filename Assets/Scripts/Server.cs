@@ -20,7 +20,17 @@ public class Server : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        serverTimer = 0.0f;
+        serverTick = 0;
+        minTimeBetweenTicks = 1 / SERVER_TICK_RATE;
+
+        receivedPackets = new Queue<P2Packet?>();
+
+        if (SteamLobbyManager.Instance)
+        {
+            currentLobby = SteamLobbyManager.Instance.CurrentLobby;
+            owner = currentLobby.Owner;
+        }
     }
 
     // Update is called once per frame
