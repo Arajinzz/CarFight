@@ -157,6 +157,9 @@ public class Packet
         InsertFloat(stateMsg.angular_velocity.y);
         InsertFloat(stateMsg.angular_velocity.z);
 
+        InsertFloat(stateMsg.drag);
+        InsertFloat(stateMsg.angular_drag);
+
     }
 
     public Structs.StateMessage PopStateMessage()
@@ -167,6 +170,8 @@ public class Packet
         stateMsg.rotation = new Quaternion(PopFloat(), PopFloat(), PopFloat(), PopFloat());
         stateMsg.velocity = new Vector3(PopFloat(), PopFloat(), PopFloat());
         stateMsg.angular_velocity = new Vector3(PopFloat(), PopFloat(), PopFloat());
+        stateMsg.drag = PopFloat();
+        stateMsg.angular_drag = PopFloat();
 
         return stateMsg;
     }

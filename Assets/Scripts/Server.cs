@@ -126,6 +126,8 @@ public class Server : MonoBehaviour
                 stateMsg.rotation = whatPlayer.transform.rotation;
                 stateMsg.velocity = PlayerRb.velocity;
                 stateMsg.angular_velocity = PlayerRb.angularVelocity;
+                stateMsg.drag = PlayerRb.drag;
+                stateMsg.angular_drag = PlayerRb.angularDrag;
 
                 var statePacket = new Packet(Packet.PacketType.StateMessage);
                 statePacket.InsertUInt64(recPacket.Value.SteamId);

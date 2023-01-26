@@ -34,6 +34,8 @@ public class Structs
         public Quaternion rotation; // 16 bytes
         public Vector3 velocity; // 12 bytes
         public Vector3 angular_velocity; // 12 bytes
+        public float drag;
+        public float angular_drag;
     }
 
 }
