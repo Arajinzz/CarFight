@@ -63,13 +63,12 @@ public class CarController : MonoBehaviour
 
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ProcessMouvement(Structs.Inputs input, float deltaTime)
     {
-        isAccel = Input.GetKey(KeyCode.W);
-        isBrake = Input.GetKey(KeyCode.S);
-        isTurningLeft = Input.GetKey(KeyCode.A);
-        isTurningRight = Input.GetKey(KeyCode.D);
+        isAccel = input.up;
+        isBrake = input.down;
+        isTurningLeft = input.left;
+        isTurningRight = input.right;
 
         // If we're accelerating override Brake (don't brake)
         // This is just to test smoothly, it will be changed
@@ -77,28 +76,23 @@ public class CarController : MonoBehaviour
 
         // Override
         isTurningLeft = isTurningRight ? false : isTurningLeft;
-    }
-
-    // We handle physics here
-    void FixedUpdate()
-    {
 
         bool oneWheelInGround = false;
         carRb.drag = drag;
 
-        for( int i = 0; i < SuspensionPoints.Length; i++)
+        for (int i = 0; i < SuspensionPoints.Length; i++)
         {
             GameObject suspensionPt = SuspensionPoints[i];
             Vector3 direction = transform.TransformDirection(suspensionPt.transform.up);
             Ray ray = new Ray(suspensionPt.transform.position, -direction);
-            
+
             RaycastHit hit;
             bool didWeHit = Physics.Raycast(ray, out hit, SuspensionDistance);
 
             // For debug purposes
             SuspensionDebugRays[i] = ray;
             SuspensionDebugHit[i] = hit;
-     
+
             if (didWeHit)
             {
                 // Calculate compression ratio
@@ -150,7 +144,6 @@ public class CarController : MonoBehaviour
         {
             carRb.drag = 0;
         }
-
     }
 
     public void SetCamera()
