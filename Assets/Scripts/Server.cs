@@ -92,4 +92,23 @@ public class Server : MonoBehaviour
 
     }
 
+    private void SendToTarget(SteamId target, byte[] data)
+    {
+        SteamNetworking.SendP2PPacket(target, data);
+    }
+
+    public void SendToAllLobby(P2Packet packet)
+    {
+        foreach (Friend member in currentLobby.Members)
+        {
+            // This is me
+            if (member.Id == owner.Id)
+            {
+                // Some handling needs to be done here
+                continue;
+            }
+            SendToTarget(member.Id, packet.Data);
+        }
+    }
+
 }
