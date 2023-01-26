@@ -96,4 +96,26 @@ public class Packet
         return data;
     }
 
+    public void InsertInput(Structs.Inputs inputs)
+    {
+
+        InsertBool(inputs.up);
+        InsertBool(inputs.down);
+        InsertBool(inputs.left);
+        InsertBool(inputs.right);
+
+    }
+
+    public Structs.Inputs PopInput()
+    {
+        Structs.Inputs inputs;
+        inputs.up = PopBool();
+        inputs.down = PopBool();
+        inputs.left = PopBool();
+        inputs.right = PopBool();
+
+        return inputs;
+
+    }
+
 }
