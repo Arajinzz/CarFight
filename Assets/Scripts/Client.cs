@@ -16,7 +16,7 @@ public class Client : MonoBehaviour
     private float clientTimer;
     public uint clientTick;
     private float minTimeBetweenTicks;
-    private const float CLIENT_TICK_RATE = 120f;
+    private const float CLIENT_TICK_RATE = 60f;
 
     private Queue<P2Packet?> receivedPackets;
 
@@ -48,8 +48,40 @@ public class Client : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (SteamLobbyManager.Instance && currentLobby.Owner.Id != owner.Id)
+        {
+            // Means owner changed, server changed
+            owner = currentLobby.Owner;
+            clientTick = Convert.ToUInt32(currentLobby.GetData("ServerTick"));
+        }
+
+        // Receive packets ASAP, client receives packets only if he is not a server
+        if (SteamLobbyManager.Instance && !owner.IsMe)
+            ReceivePackets();
+
+        clientTimer += Time.deltaTime;
+
+        while (clientTimer >= minTimeBetweenTicks)
+        {
+            clientTimer -= minTimeBetweenTicks;
+
+            // Handle tick here
+            HandleTick();
+
+            clientTick++;
+        }
     }
+
+    private void HandleTick()
+    {
+
+    }
+
+    private void ReceivePackets()
+    {
+
+    }
+
 
     private void SendToServer(byte[] data)
     {
