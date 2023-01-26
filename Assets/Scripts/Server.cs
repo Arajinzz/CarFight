@@ -145,7 +145,8 @@ public class Server : MonoBehaviour
             // This is me
             if (member.Id == owner.Id)
             {
-                // Some handling needs to be done here
+                // Redirect packet to my client script
+                gameObject.GetComponent<Client>().PacketManualEnqeue(packet);
                 continue;
             }
             SendToTarget(member.Id, packet.Data);
