@@ -6,6 +6,9 @@ using UnityEngine;
 
 public class Server : MonoBehaviour
 {
+    [SerializeField]
+    GameManager gameManager;
+
     // to run at fixed tick rate
     private float serverTimer;
     public uint serverTick;
