@@ -153,6 +153,10 @@ public class Client : MonoBehaviour
         }
     }
 
+    public void PacketManualEnqeue(P2Packet packet)
+    {
+        receivedPackets.Enqueue(packet);
+    }
 
     private void SendToServer(byte[] data)
     {
