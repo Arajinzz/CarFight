@@ -30,6 +30,7 @@ public class CarController : MonoBehaviour
     public float AccelPower = 5.0f;
     public float TopCarForce = 100.0f;
     private float CarCurrentForce;
+    private bool oneWheelInGround = false;
 
     public float TorquePower = 50.0f;
 
@@ -63,23 +64,9 @@ public class CarController : MonoBehaviour
 
     }
 
-    public void ProcessMouvement(Structs.Inputs input, float deltaTime)
+    private void FixedUpdate()
     {
-        isAccel = input.up;
-        isBrake = input.down;
-        isTurningLeft = input.left;
-        isTurningRight = input.right;
-
-        // If we're accelerating override Brake (don't brake)
-        // This is just to test smoothly, it will be changed
-        isBrake = isAccel ? false : isBrake;
-
-        // Override
-        isTurningLeft = isTurningRight ? false : isTurningLeft;
-
-        bool oneWheelInGround = false;
-        carRb.drag = drag;
-
+        // Suspension
         for (int i = 0; i < SuspensionPoints.Length; i++)
         {
             GameObject suspensionPt = SuspensionPoints[i];
@@ -111,7 +98,22 @@ public class CarController : MonoBehaviour
             oneWheelInGround |= didWeHit;
 
         }
+    }
 
+    public void ProcessMouvement(Structs.Inputs input, float deltaTime)
+    {
+        isAccel = input.up;
+        isBrake = input.down;
+        isTurningLeft = input.left;
+        isTurningRight = input.right;
+        carRb.drag = drag;
+
+        // If we're accelerating override Brake (don't brake)
+        // This is just to test smoothly, it will be changed
+        isBrake = isAccel ? false : isBrake;
+
+        // Override
+        isTurningLeft = isTurningRight ? false : isTurningLeft;
 
         // Calculate projection of forward vector onto the ground
         // or wherever the car is running on
