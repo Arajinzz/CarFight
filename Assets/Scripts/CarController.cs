@@ -66,6 +66,8 @@ public class CarController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        oneWheelInGround = false;
+
         // Suspension
         for (int i = 0; i < SuspensionPoints.Length; i++)
         {
