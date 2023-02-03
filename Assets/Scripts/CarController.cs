@@ -19,6 +19,8 @@ public class CarController : MonoBehaviour
     private Rigidbody carRb;
 
     public GameObject[] SuspensionPoints;
+    private Transform[] WheelsMeshes;
+
     public float SuspensionDistance = 0.5f;
     public float SuspensionStrength = 100.0f;
     public float SuspensionDamping = 2;
@@ -54,6 +56,20 @@ public class CarController : MonoBehaviour
         SuspensionDebugRays = new Ray[SuspensionPoints.Length];
 
         SuspensionCache = new SuspensionParams[SuspensionPoints.Length];
+
+        WheelsMeshes = new Transform[SuspensionPoints.Length];
+        // Get wheels
+        for (int i = 0; i < SuspensionPoints.Length; i++)
+        {
+            // find the wheel
+            foreach (Transform t in SuspensionPoints[i].transform)
+            {
+                if (t.tag.Equals("Wheel"))
+                {
+                    WheelsMeshes[i] = t;
+                }
+            }
+        }
 
         carRb = GetComponent<Rigidbody>();
 
