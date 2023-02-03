@@ -123,7 +123,7 @@ public class CarController : MonoBehaviour
         {
             Transform wheel = WheelsMeshes[i];
             Vector3 impactPoint = SuspensionCache[i].impactPt;
-            wheel.position = impactPoint;
+            wheel.position = new Vector3(wheel.position.x, impactPoint.y, wheel.position.z);
         }
     }
 
