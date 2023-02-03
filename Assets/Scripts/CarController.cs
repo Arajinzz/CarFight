@@ -117,6 +117,14 @@ public class CarController : MonoBehaviour
             oneWheelInGround |= didWeHit;
 
         }
+
+        // Wheels fake mouvements
+        for (int i = 0; i < SuspensionCache.Length; i++)
+        {
+            Transform wheel = WheelsMeshes[i];
+            Vector3 impactPoint = SuspensionCache[i].impactPt;
+            wheel.position = impactPoint;
+        }
     }
 
     public void ProcessMouvement(Structs.Inputs input, float deltaTime)
