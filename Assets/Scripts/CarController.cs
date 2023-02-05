@@ -81,6 +81,17 @@ public class CarController : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        // Wheels fake mouvements
+        for (int i = 0; i < SuspensionCache.Length; i++)
+        {
+            Transform wheel = WheelsMeshes[i];
+            Vector3 impactPoint = SuspensionCache[i].impactPt;
+            wheel.localPosition = new Vector3(wheel.position.x, SuspensionDistance, wheel.position.z);
+        }
+    }
+
     private void FixedUpdate()
     {
         oneWheelInGround = false;
@@ -116,14 +127,6 @@ public class CarController : MonoBehaviour
 
             oneWheelInGround |= didWeHit;
 
-        }
-
-        // Wheels fake mouvements
-        for (int i = 0; i < SuspensionCache.Length; i++)
-        {
-            Transform wheel = WheelsMeshes[i];
-            Vector3 impactPoint = SuspensionCache[i].impactPt;
-            wheel.position = new Vector3(wheel.position.x, impactPoint.y, wheel.position.z);
         }
     }
 
