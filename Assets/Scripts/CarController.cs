@@ -67,6 +67,9 @@ public class CarController : MonoBehaviour
                 if (t.tag.Equals("Wheel"))
                 {
                     WheelsMeshes[i] = t;
+                    // Set wheel position to the suspension distance
+                    // Temporary value to be adjusted later (needs to calculated with wheel radius in mind)
+                    t.position = new Vector3(t.position.x, SuspensionPoints[i].transform.position.y - (SuspensionDistance - 0.5f), t.position.z);
                 }
             }
         }
@@ -88,7 +91,7 @@ public class CarController : MonoBehaviour
         {
             Transform wheel = WheelsMeshes[i];
             Vector3 impactPoint = SuspensionCache[i].impactPt;
-            wheel.localPosition = new Vector3(wheel.position.x, SuspensionDistance, wheel.position.z);
+            wheel.localPosition = new Vector3(wheel.localPosition.x, wheel.localPosition.y, wheel.localPosition.z);
         }
     }
 
