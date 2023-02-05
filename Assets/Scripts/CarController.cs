@@ -94,8 +94,7 @@ public class CarController : MonoBehaviour
             Vector3 impactPoint = SuspensionCache[i].impactPt;
             Vector3 newPosition = new Vector3(wheel.position.x, SuspensionPoints[i].transform.position.y - ((1 - SuspensionCache[i].compRatio) * (SuspensionDistance - 0.5f)), wheel.position.z);
             wheel.position = Vector3.Lerp(wheel.position, newPosition, Time.deltaTime * 100f);
-            wheel.gameObject.SetActive(!WheelsDisable);
-        }
+            wheel.gameObject.SetActive(!WheelsDisable);        }
     }
 
     private void FixedUpdate()
