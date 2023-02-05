@@ -767,7 +767,7 @@ MonoBehaviour:
   - {fileID: 4513166477018442560}
   - {fileID: 4513166476042924982}
   - {fileID: 4513166476890989959}
-  SuspensionDistance: 0.6
+  SuspensionDistance: 0.8
   SuspensionStrength: 100
   SuspensionDamping: 2
   AccelPower: 80

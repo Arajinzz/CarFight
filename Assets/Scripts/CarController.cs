@@ -20,6 +20,7 @@ public class CarController : MonoBehaviour
 
     public GameObject[] SuspensionPoints;
     private Transform[] WheelsMeshes;
+    private bool WheelsDisable = true;
 
     public float SuspensionDistance = 0.5f;
     public float SuspensionStrength = 100.0f;
@@ -87,11 +88,13 @@ public class CarController : MonoBehaviour
     private void Update()
     {
         // Wheels fake mouvements
-        for (int i = 0; i < SuspensionCache.Length; i++)
+        for (int i = 0; i < WheelsMeshes.Length; i++)
         {
             Transform wheel = WheelsMeshes[i];
             Vector3 impactPoint = SuspensionCache[i].impactPt;
-            wheel.position = new Vector3(wheel.position.x, SuspensionPoints[i].transform.position.y + SuspensionCache[i].compRatio * (SuspensionDistance - 0.5f), wheel.position.z);
+            Vector3 newPosition = new Vector3(wheel.position.x, SuspensionPoints[i].transform.position.y - ((1 - SuspensionCache[i].compRatio) * (SuspensionDistance - 0.5f)), wheel.position.z);
+            wheel.position = Vector3.Lerp(wheel.position, newPosition, Time.deltaTime * 100f);
+            wheel.gameObject.SetActive(!WheelsDisable);
         }
     }
 
@@ -113,20 +116,22 @@ public class CarController : MonoBehaviour
             SuspensionDebugRays[i] = ray;
             SuspensionDebugHit[i] = hit;
 
+            // Calculate compression ratio
+            float compression = 1 - (hit.distance / SuspensionDistance);
+
             if (didWeHit)
             {
-                // Calculate compression ratio
-                float compression = 1 - (hit.distance / SuspensionDistance);
                 // Calculate force to be applied
                 float force = (compression * SuspensionStrength) - (SuspensionDamping * carRb.GetPointVelocity(suspensionPt.transform.position).y);
                 // Calculate force, (Opposite of raycast)
                 carRb.AddForceAtPosition(direction * force, suspensionPt.transform.position);
 
-                // Store in cache
-                SuspensionCache[i].compRatio = compression;
                 SuspensionCache[i].impactPt = hit.point;
                 SuspensionCache[i].impactNormal = hit.normal;
             }
+
+            // Store in cache
+            SuspensionCache[i].compRatio = compression;
 
             oneWheelInGround |= didWeHit;
 
