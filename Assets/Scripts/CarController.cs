@@ -52,6 +52,7 @@ public class CarController : MonoBehaviour
     public float ShootingRate = 0.5f;
     public GameObject ShootingPoint;
     private float ShootTimer = 0.0f;
+    public GameObject Projectile;
 
 
     // Start is called before the first frame update
@@ -112,6 +113,7 @@ public class CarController : MonoBehaviour
             ShootTimer = 0.0f;
 
             // Instantiate Projectile
+            Instantiate(Projectile, ShootingPoint.transform.position, Quaternion.identity);
         }
     }
 

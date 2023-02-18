@@ -726,6 +726,8 @@ MonoBehaviour:
   drag: 2.5
   ShootingRate: 0.5
   ShootingPoint: {fileID: 7110126947960625058}
+  Projectile: {fileID: 3419574219071925929, guid: 5d19aa165ae12c24c8ed75ee83cfd798,
+    type: 3}
 --- !u!1 &4513166477578020920
 GameObject:
   m_ObjectHideFlags: 0
