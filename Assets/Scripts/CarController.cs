@@ -51,6 +51,7 @@ public class CarController : MonoBehaviour
     // Shooting params
     public float ShootingRate = 0.5f;
     public GameObject ShootingPoint;
+    private float ShootTimer = 0.0f;
 
 
     // Start is called before the first frame update
@@ -93,6 +94,8 @@ public class CarController : MonoBehaviour
 
     private void Update()
     {
+        ShootTimer += Time.deltaTime;
+
         // Wheels fake mouvements
         for (int i = 0; i < WheelsMeshes.Length; i++)
         {
@@ -100,7 +103,16 @@ public class CarController : MonoBehaviour
             Vector3 impactPoint = SuspensionCache[i].impactPt;
             Vector3 newPosition = new Vector3(wheel.position.x, SuspensionPoints[i].transform.position.y - ((1 - SuspensionCache[i].compRatio) * (SuspensionDistance - 0.5f)), wheel.position.z);
             wheel.position = Vector3.Lerp(wheel.position, newPosition, Time.deltaTime * 100f);
-            wheel.gameObject.SetActive(!WheelsDisable);        }
+            wheel.gameObject.SetActive(!WheelsDisable);
+        }
+
+        // Shoot
+        if (Input.GetMouseButton(0) && ShootTimer >= ShootingRate)
+        {
+            ShootTimer = 0.0f;
+
+            // Instantiate Projectile
+        }
     }
 
     private void FixedUpdate()
