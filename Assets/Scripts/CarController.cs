@@ -113,7 +113,7 @@ public class CarController : MonoBehaviour
             ShootTimer = 0.0f;
 
             // Instantiate Projectile
-            Instantiate(Projectile, ShootingPoint.transform.position, Quaternion.identity);
+            Instantiate(Projectile, ShootingPoint.transform.position, ShootingPoint.transform.rotation);
         }
     }
 
