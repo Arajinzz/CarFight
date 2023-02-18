@@ -7,10 +7,9 @@ public class Projectile : MonoBehaviour
 
     public float Speed = 1000.0f;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
-        
+        Destroy(gameObject, 5.0f);
     }
 
     // Update is called once per frame
