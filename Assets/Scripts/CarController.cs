@@ -47,6 +47,12 @@ public class CarController : MonoBehaviour
     bool isTurningRight = false;
     bool isTurningLeft = false;
 
+
+    // Shooting params
+    public float ShootingRate = 0.5f;
+    public GameObject ShootingPoint;
+
+
     // Start is called before the first frame update
     void Start()
     {
