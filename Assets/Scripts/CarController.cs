@@ -204,7 +204,7 @@ public class CarController : MonoBehaviour
         FollowCamera.LookAt = transform;
     }
 
-    public void ProcessShooting(Structs.Inputs inputs, float deltaTime)
+    public float Server_ProcessShooting(Structs.Inputs inputs, float deltaTime)
     {
         ShootTimer += deltaTime;
 
@@ -215,7 +215,11 @@ public class CarController : MonoBehaviour
 
             // Instantiate Projectile
             Instantiate(Projectile, ShootingPoint.transform.position, ShootingPoint.transform.rotation);
+
+            return ShootTimer;
         }
+
+        return ShootTimer;
     }
 
     void OnDrawGizmos()
