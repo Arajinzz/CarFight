@@ -95,7 +95,7 @@ public class Server : MonoBehaviour
                 packetToSend.Data = packet.buffer.ToArray();
 
                 // Send to all players
-                SendToAllLobby(packetToSend);
+                SendToAllLobby(packetToSend, true);
 
                 // Send all players to target
                 foreach (SteamId id in gameManager.PlayerList.Keys)
@@ -139,7 +139,7 @@ public class Server : MonoBehaviour
                 packetToSend.SteamId = recPacket.Value.SteamId;
                 packetToSend.Data = statePacket.buffer.ToArray();
 
-                SendToAllLobby(packetToSend);
+                SendToAllLobby(packetToSend, false);
 
                 // Process Shooting
                 float ShootTimer = whatPlayerController.Server_ProcessShooting(inputMsg.inputs, deltaTime);
@@ -158,7 +158,7 @@ public class Server : MonoBehaviour
                 P2Packet shootingPacketToSend;
                 shootingPacketToSend.SteamId = recPacket.Value.SteamId;
                 shootingPacketToSend.Data = shootPacket.buffer.ToArray();
-                SendToAllLobby(shootingPacketToSend);
+                SendToAllLobby(shootingPacketToSend, false);
 
             }
 
@@ -189,12 +189,12 @@ public class Server : MonoBehaviour
         SteamNetworking.SendP2PPacket(target, data);
     }
 
-    public void SendToAllLobby(P2Packet packet)
+    public void SendToAllLobby(P2Packet packet, bool manualRedirect)
     {
         foreach (Friend member in currentLobby.Members)
         {
             // This is me
-            if (member.Id == owner.Id)
+            if (member.Id == owner.Id && manualRedirect)
             {
                 // Redirect packet to my client script
                 gameObject.GetComponent<Client>().PacketManualEnqeue(packet);
