@@ -151,7 +151,7 @@ public class Server : MonoBehaviour
                 shootingMsg.inputs = inputMsg.inputs;
 
                 // Resend to all client so that they know that a client has shot a projectile
-                var shootPacket = new Packet(Packet.PacketType.Shoot);
+                var shootPacket = new Packet(Packet.PacketType.ShootingMessage);
                 shootPacket.InsertUInt64(recPacket.Value.SteamId);
                 shootPacket.InsertShootingMessage(shootingMsg);
 

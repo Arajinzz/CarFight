@@ -11,7 +11,7 @@ public class Packet
         InstantiatePlayer,
         InputMessage,
         StateMessage,
-        Shoot,
+        ShootingMessage,
     }
 
     public UInt16 packetType;

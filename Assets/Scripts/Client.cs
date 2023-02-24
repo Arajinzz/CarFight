@@ -150,7 +150,7 @@ public class Client : MonoBehaviour
                     _playerRb.drag = stateMsg.drag;
                     _playerRb.angularDrag = stateMsg.angular_drag;
                 }
-            } else if (packet.GetPacketType() == Packet.PacketType.Shoot)
+            } else if (packet.GetPacketType() == Packet.PacketType.ShootingMessage)
             {
 
                 SteamId playerId = packet.PopUInt64();
