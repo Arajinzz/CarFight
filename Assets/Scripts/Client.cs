@@ -86,16 +86,6 @@ public class Client : MonoBehaviour
 
         if (localPlayer)
         {
-            // if i Am a server let server process
-            // to avoid multiple mouvement process
-            // this probably should be reworked
-            if (owner.Id != SteamManager.Instance.PlayerId)
-            {
-                // Process mouvement here
-                localPlayer.ProcessMouvement(inputs, deltaTime);
-                Physics.Simulate(deltaTime);
-            }
-
             Structs.InputMessage inputMsg;
             inputMsg.tick_number = clientTick;
             inputMsg.inputs = inputs;
