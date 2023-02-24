@@ -138,21 +138,23 @@ public class Packet
         return inputMsg;
     }
 
-    public void InsertShootingMessage(Structs.InputMessage inputMsg)
+    public void InsertShootingMessage(Structs.ShootingMessage shootingMsg)
     {
 
-        InsertUInt32(inputMsg.tick_number);
-        InsertInput(inputMsg.inputs);
+        InsertUInt32(shootingMsg.tick_number);
+        InsertFloat(shootingMsg.shootingTimer);
+        InsertInput(shootingMsg.inputs);
 
     }
 
-    public Structs.InputMessage PopShootingMessage()
+    public Structs.ShootingMessage PopShootingMessage()
     {
-        Structs.InputMessage inputMsg;
-        inputMsg.tick_number = PopUInt32();
-        inputMsg.inputs = PopInput();
+        Structs.ShootingMessage shootingMsg;
+        shootingMsg.tick_number = PopUInt32();
+        shootingMsg.shootingTimer = PopFloat();
+        shootingMsg.inputs = PopInput();
 
-        return inputMsg;
+        return shootingMsg;
     }
 
     public void InsertStateMessage(Structs.StateMessage stateMsg)

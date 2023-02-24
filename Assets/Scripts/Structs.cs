@@ -39,4 +39,12 @@ public class Structs
         public float angular_drag;
     }
 
+    public struct ShootingMessage {
+
+        public uint tick_number;
+        public float shootingTimer;
+        public Inputs inputs;
+
+    }
+
 }
