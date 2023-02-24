@@ -145,8 +145,8 @@ public class Server : MonoBehaviour
                 whatPlayerController.ProcessShooting(inputMsg.inputs, deltaTime);
                 // Resend to all client so that they know that a client has shot a projectile
                 var shootPacket = new Packet(Packet.PacketType.Shoot);
-                statePacket.InsertUInt64(recPacket.Value.SteamId);
-                statePacket.InsertShootingMessage(inputMsg);
+                shootPacket.InsertUInt64(recPacket.Value.SteamId);
+                shootPacket.InsertShootingMessage(inputMsg);
 
                 P2Packet shootingPacketToSend;
                 shootingPacketToSend.SteamId = recPacket.Value.SteamId;
