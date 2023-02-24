@@ -11,6 +11,7 @@ public class Packet
         InstantiatePlayer,
         InputMessage,
         StateMessage,
+        Shoot,
     }
 
     public UInt16 packetType;
@@ -129,6 +130,23 @@ public class Packet
     }
 
     public Structs.InputMessage PopInputMessage()
+    {
+        Structs.InputMessage inputMsg;
+        inputMsg.tick_number = PopUInt32();
+        inputMsg.inputs = PopInput();
+
+        return inputMsg;
+    }
+
+    public void InsertShootingMessage(Structs.InputMessage inputMsg)
+    {
+
+        InsertUInt32(inputMsg.tick_number);
+        InsertInput(inputMsg.inputs);
+
+    }
+
+    public Structs.InputMessage PopShootingMessage()
     {
         Structs.InputMessage inputMsg;
         inputMsg.tick_number = PopUInt32();

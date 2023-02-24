@@ -146,12 +146,12 @@ public class Server : MonoBehaviour
                 // Resend to all client so that they know that a client has shot a projectile
                 var shootPacket = new Packet(Packet.PacketType.Shoot);
                 statePacket.InsertUInt64(recPacket.Value.SteamId);
-                statePacket.InsertStateMessage(inputMsg.inputs);
+                statePacket.InsertShootingMessage(inputMsg);
 
                 P2Packet shootingPacketToSend;
-                packetToSend.SteamId = recPacket.Value.SteamId;
-                packetToSend.Data = statePacket.buffer.ToArray();
-                SendToAllLobby(packetToSend);
+                shootingPacketToSend.SteamId = recPacket.Value.SteamId;
+                shootingPacketToSend.Data = statePacket.buffer.ToArray();
+                SendToAllLobby(shootingPacketToSend);
 
             }
 
