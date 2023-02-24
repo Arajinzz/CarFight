@@ -95,8 +95,6 @@ public class CarController : MonoBehaviour
 
     private void Update()
     {
-        ShootTimer += Time.deltaTime;
-
         // Wheels fake mouvements
         for (int i = 0; i < WheelsMeshes.Length; i++)
         {
@@ -105,15 +103,6 @@ public class CarController : MonoBehaviour
             Vector3 newPosition = new Vector3(wheel.position.x, SuspensionPoints[i].transform.position.y - ((1 - SuspensionCache[i].compRatio) * (SuspensionDistance - 0.5f)), wheel.position.z);
             wheel.position = Vector3.Lerp(wheel.position, newPosition, Time.deltaTime * 100f);
             wheel.gameObject.SetActive(!WheelsDisable);
-        }
-
-        // Shoot
-        if (Input.GetMouseButton(0) && ShootTimer >= ShootingRate)
-        {
-            ShootTimer = 0.0f;
-
-            // Instantiate Projectile
-            Instantiate(Projectile, ShootingPoint.transform.position, ShootingPoint.transform.rotation);
         }
     }
 
@@ -213,6 +202,20 @@ public class CarController : MonoBehaviour
         FollowCamera = GameObject.Find("VCam").GetComponent<CinemachineVirtualCamera>();
         FollowCamera.Follow = transform;
         FollowCamera.LookAt = transform;
+    }
+
+    public void ProcessShooting(Structs.Inputs inputs, float deltaTime)
+    {
+        ShootTimer += deltaTime;
+
+        // Shoot
+        if (inputs.rclick && ShootTimer >= ShootingRate)
+        {
+            ShootTimer = 0.0f;
+
+            // Instantiate Projectile
+            Instantiate(Projectile, ShootingPoint.transform.position, ShootingPoint.transform.rotation);
+        }
     }
 
     void OnDrawGizmos()

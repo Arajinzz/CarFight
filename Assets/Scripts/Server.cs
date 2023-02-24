@@ -140,6 +140,10 @@ public class Server : MonoBehaviour
                 packetToSend.Data = statePacket.buffer.ToArray();
 
                 SendToAllLobby(packetToSend);
+
+                // Process Shooting
+
+
             }
 
         }
