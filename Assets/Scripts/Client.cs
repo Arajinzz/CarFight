@@ -150,6 +150,18 @@ public class Client : MonoBehaviour
                     _playerRb.drag = stateMsg.drag;
                     _playerRb.angularDrag = stateMsg.angular_drag;
                 }
+            } else if (packet.GetPacketType() == Packet.PacketType.Shoot)
+            {
+
+                SteamId playerId = packet.PopUInt64();
+                Structs.InputMessage inputMsg = packet.PopInputMessage();
+
+                if (gameManager.PlayerList.ContainsKey(playerId))
+                {
+                    GameObject _player = gameManager.PlayerList[playerId];
+                    _player.GetComponent<CarController>().ProcessShooting(inputMsg.inputs, deltaTime);
+                }
+
             }
 
         }
