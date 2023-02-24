@@ -69,7 +69,7 @@ public class Server : MonoBehaviour
             if (SteamManager.Instance)
                 currentLobby.SetData("ServerTick", serverTick.ToString());
 
-            HandleTick();
+            HandleTick(minTimeBetweenTicks);
 
             serverTick++;
         }
@@ -77,7 +77,7 @@ public class Server : MonoBehaviour
     }
 
 
-    private void HandleTick()
+    private void HandleTick(float deltaTime)
     {
 
         // handle received packets
@@ -142,7 +142,16 @@ public class Server : MonoBehaviour
                 SendToAllLobby(packetToSend);
 
                 // Process Shooting
+                whatPlayerController.ProcessShooting(inputMsg.inputs, deltaTime);
+                // Resend to all client so that they know that a client has shot a projectile
+                var shootPacket = new Packet(Packet.PacketType.Shoot);
+                statePacket.InsertUInt64(recPacket.Value.SteamId);
+                statePacket.InsertStateMessage(inputMsg.inputs);
 
+                P2Packet shootingPacketToSend;
+                packetToSend.SteamId = recPacket.Value.SteamId;
+                packetToSend.Data = statePacket.buffer.ToArray();
+                SendToAllLobby(packetToSend);
 
             }
 
