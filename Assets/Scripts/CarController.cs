@@ -223,6 +223,16 @@ public class CarController : MonoBehaviour
         return ShootTimer;
     }
 
+    public void Client_ProcessShooting(Structs.Inputs inputs, float ShootTimer)
+    {
+        // Shoot
+        if (inputs.rclick && ShootTimer >= ShootingRate)
+        {
+            // Instantiate Projectile
+            Instantiate(Projectile, ShootingPoint.transform.position, ShootingPoint.transform.rotation);
+        }
+    }
+
     void OnDrawGizmos()
     {
 
