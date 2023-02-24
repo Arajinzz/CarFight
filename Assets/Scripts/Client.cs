@@ -154,12 +154,12 @@ public class Client : MonoBehaviour
             {
 
                 SteamId playerId = packet.PopUInt64();
-                Structs.InputMessage inputMsg = packet.PopInputMessage();
+                Structs.ShootingMessage shootingMsg = packet.PopShootingMessage();
 
                 if (gameManager.PlayerList.ContainsKey(playerId))
                 {
                     GameObject _player = gameManager.PlayerList[playerId];
-                    _player.GetComponent<CarController>().ProcessShooting(inputMsg.inputs, deltaTime);
+                    _player.GetComponent<CarController>().Client_ProcessShooting(shootingMsg.inputs, shootingMsg.shootingTimer);
                 }
 
             }
