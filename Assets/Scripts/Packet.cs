@@ -103,6 +103,7 @@ public class Packet
         InsertBool(inputs.down);
         InsertBool(inputs.left);
         InsertBool(inputs.right);
+        InsertBool(inputs.rclick);
 
     }
 
@@ -113,6 +114,7 @@ public class Packet
         inputs.down = PopBool();
         inputs.left = PopBool();
         inputs.right = PopBool();
+        inputs.rclick = PopBool();
 
         return inputs;
 

@@ -81,6 +81,8 @@ public class Client : MonoBehaviour
         inputs.down = Input.GetKey(KeyCode.S);
         inputs.left = Input.GetKey(KeyCode.A);
         inputs.right = Input.GetKey(KeyCode.D);
+        inputs.rclick = Input.GetMouseButton(0);
+
 
         if (localPlayer)
         {

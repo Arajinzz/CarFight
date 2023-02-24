@@ -11,6 +11,7 @@ public class Structs
         public bool down;
         public bool left;
         public bool right;
+        public bool rclick;
 
     }
 
