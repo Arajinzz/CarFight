@@ -143,14 +143,21 @@ public class Server : MonoBehaviour
 
                 // Process Shooting
                 float ShootTimer = whatPlayerController.Server_ProcessShooting(inputMsg.inputs, deltaTime);
+
+                // Create ShootingMessage packet
+                Structs.ShootingMessage shootingMsg;
+                shootingMsg.shootingTimer = ShootTimer;
+                shootingMsg.tick_number = serverTick;
+                shootingMsg.inputs = inputMsg.inputs;
+
                 // Resend to all client so that they know that a client has shot a projectile
                 var shootPacket = new Packet(Packet.PacketType.Shoot);
                 shootPacket.InsertUInt64(recPacket.Value.SteamId);
-                shootPacket.InsertShootingMessage(inputMsg);
+                shootPacket.InsertShootingMessage(shootingMsg);
 
                 P2Packet shootingPacketToSend;
                 shootingPacketToSend.SteamId = recPacket.Value.SteamId;
-                shootingPacketToSend.Data = statePacket.buffer.ToArray();
+                shootingPacketToSend.Data = shootPacket.buffer.ToArray();
                 SendToAllLobby(shootingPacketToSend);
 
             }
