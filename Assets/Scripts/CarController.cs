@@ -211,12 +211,13 @@ public class CarController : MonoBehaviour
         // Shoot
         if (inputs.rclick && ShootTimer >= ShootingRate)
         {
+            float return_value = ShootTimer;
             ShootTimer = 0.0f;
 
             // Instantiate Projectile
             Instantiate(Projectile, ShootingPoint.transform.position, ShootingPoint.transform.rotation);
 
-            return ShootTimer;
+            return return_value;
         }
 
         return ShootTimer;

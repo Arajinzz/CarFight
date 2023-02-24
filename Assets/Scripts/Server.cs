@@ -142,7 +142,7 @@ public class Server : MonoBehaviour
                 SendToAllLobby(packetToSend);
 
                 // Process Shooting
-                whatPlayerController.ProcessShooting(inputMsg.inputs, deltaTime);
+                float ShootTimer = whatPlayerController.Server_ProcessShooting(inputMsg.inputs, deltaTime);
                 // Resend to all client so that they know that a client has shot a projectile
                 var shootPacket = new Packet(Packet.PacketType.Shoot);
                 shootPacket.InsertUInt64(recPacket.Value.SteamId);
